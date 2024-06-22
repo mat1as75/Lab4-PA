@@ -16,13 +16,12 @@
 
 #include <string>
 #include <vector>
-#include "ICollection/interfaces/ICollectible.h"
-#include "ICollection/interfaces/IDictionary.h"
+#include "../ICollection/interfaces/ICollectible.h"
 
 
 using namespace std;
 
-class Usuario: ICollectible {
+class Usuario: public ICollectible {
 protected:
 	string nickname;
 	string password;

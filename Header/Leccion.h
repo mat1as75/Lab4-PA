@@ -16,17 +16,22 @@
 #include <string>
 #include <vector>
 #include "Ejercicio.h" /* Dependencia en Diagrama de Clases */
+#include "DTEjercicio.h"
+#include "../ICollection/interfaces/ICollectible.h"
+#include "../ICollection/interfaces/ICollection.h"
 using namespace std;
 
-class Leccion {
+class Leccion: public ICollectible {
 private:
   string tema;
   string objAprendizaje;
-  vector <Ejercicio*> ejercicios; /* Lista de ejercicios */
+  ICollection* misEjercicios; /* Lista de ejercicios */
 public:
   Leccion();
   ~Leccion();
   Leccion(string tema, string objAprendizaje);
+
+  void AgregateEjercicio(DTEjercicio* DTEjer);
 };
 
 #endif /* LECCION_H */

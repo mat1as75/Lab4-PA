@@ -23,7 +23,7 @@ protected:
     string fraseTraducida;
 public:
     DTTraduccion();
-    DTTraduccion(const DTTraduccion& orig);
+    DTTraduccion(string nombreEjercicio, string descEjercicio, string fraseATraducir, string fraseTraducida);
     virtual ~DTTraduccion();
 };
 

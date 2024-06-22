@@ -18,13 +18,12 @@ using namespace std;
 
 class CompletarFrase: public Ejercicio{
 private:
-  string fraseATraducir;
-  string fraseSolucion;
+  string fraseIncompleta;
+  vector<string> palabrasSolucion;
 public:
   CompletarFrase();
   ~CompletarFrase();
-  CompletarFrase(string fraseATraducir, string fraseSolucion);
-  string toString() override;
+  CompletarFrase(string nombreEjericio, string descripcionEjercicio, string fraseIncompleta, vector<string> palabrasSolucion);
 };
 
 #endif /* COMPLETARFRASE_H */

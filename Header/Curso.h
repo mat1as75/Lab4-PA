@@ -19,6 +19,9 @@
 //#include "Profesor.h" /* Dependencia en Diagrama de Clases */
 //include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
+#include "DTLeccion.h"
+#include "../ICo.h"
+#include "ICollection/interfaces/ICollectible.h"
 using namespace std;
 
 enum Dificultad {
@@ -27,21 +30,23 @@ enum Dificultad {
 	Avanzado
 };
 
-class Curso {
+class Curso: public ICollectible {
 private:
 	string nombreCurso;
 	string descrpicionCurso;
 	Dificultad dificultad;
 	Idioma* idiomaCurso; /* Idioma que se ensena en el Curso */
-	vector <Curso*> cursosPrevios; /* Lista de cursos previos */
+	ICollection* cursosPrevios; /* Lista de cursos previos */
+	ICollection* misLecciones; /* Lista de lecciones */
 public:
 	Curso();
 	~Curso();
 	Curso(string nombreCurso, string descrpicionCurso, Dificultad dificultad);
 	string getNombreCurso();
 	string getDificultad();
+	Leccion* AgregateLeccion(DTLeccion* DTLec);
+	void AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion);
 	/* Hacer Oper para obtener Cursos Previos */
 };
 
 #endif /* CURSO_H */
-

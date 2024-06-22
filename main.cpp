@@ -13,14 +13,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Fabrica.h"
-#include "IControlador.h"
-#include "Usuario.h"
-#include "Estudiante.h"
-#include "Profesor.h"
-#include "Idioma.h"
-#include "Date.h"
-#include "Fabrica.h"
+#include "ICo.h"
+#include "Header/Fabrica.h"
+#include "Header/IControlador.h"
+#include "Header/Usuario.h"
+#include "Header/Estudiante.h"
+#include "Header/Profesor.h"
+#include "Header/Idioma.h"
+#include "Header/Date.h"
 using namespace std;
 
 int main () {
@@ -32,11 +32,11 @@ int main () {
     cout << e1->toString() << endl;
     cout << p1->toString() << endl;*/
     
-    Fabrica* fb = new Fabrica();
-    IControlador* controller = fb->getControlador();
+    //Fabrica* fb = new Fabrica();
+    //IControlador* controller = fb->getControlador();
     
-    
-    
+    cout << "Hello, I'm Matias!" << endl;
+    //Collectible* e1 = new Estudiante();
         
     return 0;
 }

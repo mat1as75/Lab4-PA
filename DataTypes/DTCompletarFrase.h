@@ -24,7 +24,7 @@ protected:
     vector<string*> palabrasSolucion;
 public:
     DTCompletarFrase();
-    DTCompletarFrase(const DTCompletarFrase& orig);
+    DTCompletarFrase(string nombreEjercicio, string descEjercicio, string fraseIncompleta, vector<string> palabrasSolucion);
     virtual ~DTCompletarFrase();
 };
 

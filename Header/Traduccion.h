@@ -16,15 +16,14 @@
 #include <Ejercicio.h>
 using namespace std;
 
-class EJERCICIO {
+class Traduccion: public Ejercicio {
 private:
-  string nombreEjercicio;
-  string descripcionEjercicio;
+  string fraseATraducir;
+  string fraseSolucion;
 public:
-  Ejercicio();
-  ~Ejercicio();
-  Ejercicio(string nombreEjercicio, string descripcionEjercicio);
-  virtual string toString() = 0;
+  Traduccion();
+  ~Traduccion();
+  Traduccion(string nombreEjericio, string descripcionEjercicio, string fraseATraducir, string fraseSolucion);
 };
 
 #endif /* TRADUCCION_H */

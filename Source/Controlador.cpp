@@ -4,19 +4,16 @@
  */
 
 #include <iostream>
-#include "Controlador.h"
-#include "ICollection/Integer.h"
-#include "ICollection/interfaces/IKey.h"
-#include "Usuario.h"
-#include "Curso.h"
+#include <string>
+#include "../Header/Controlador.h"
+#include "../ICo.h"
+#include "../Header/Usuario.h"
+#include "../Header/Curso.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;
 
 Controlador::Controlador() {
-}
-
-Controlador::~Controlador() {
 }
 
 Controlador* Controlador::getInstance() {
@@ -26,14 +23,66 @@ Controlador* Controlador::getInstance() {
     return (Controlador::miInstancia);
 }
 
-vector<string> Controlador::listarCursosNoHabilitados() {
-    vector<string> nombresCursos;
-	/* Recorro coleccion de cursos no habilitados */
-    for(int i = 0; i < (int)noHabilitados.size(); i++) {
-        nombresCursos.push_back(noHabilitados[i]->getNombreCurso());
-    }
-    return nombresCursos;
+IDictionary* Controlador::getCursosNoHabilitados() {
+    return this->CursosNoHabilitados;
 }
+
+IDictionary* Controlador::getCursosHabilitados() {
+    return this->CursosHabilitados;
+}
+
+IDictionary* Controlador::getEstudiantes() {
+    return this->Estudiantes;
+}
+
+IDictionary* Controlador::getProfesores() {
+    return this->Profesores;
+}
+
+IDictionary* Controlador::getIdiomas() {
+    return this->Idiomas;
+}
+
+vector<string> Controlador::listarCursosNoHabilitados() {
+    IIterator* iter = this->CursosNoHabilitados->getIterator();
+    vector<string> nombresNoHabilitados;
+
+	/* Recorro coleccion de cursos no habilitados */
+    while(iter->hasCurrent()) {
+        nombresNoHabilitados.push_back(dynamic_cast<Curso*>(iter->getCurrent())->getNombreCurso());
+        iter->next(); // Siguiente
+    }
+
+    return nombresNoHabilitados;
+}
+
+void Controlador::SeleccionarCurso(string nombreCurso) {
+    IIterator* iter = this->CursosNoHabilitados->getIterator();
+    while(iter->hasCurrent()) {
+        // Si lo encuentra lo guardo en ptr auxiliar
+        if(((Curso*)iter->getCurrent())->getNombreCurso() == nombreCurso) {
+            this->auxCurso = dynamic_cast<Curso*>(iter->getCurrent());
+            break;
+        }
+        iter->next(); // Siguiente
+    }
+
+}
+
+void Controlador::IngresarDatosLeccion(string tema, string objAprendizaje) {
+    // Asigno los datos en un datatype
+    this->auxDTLeccion->setTema(tema);
+    this->auxDTLeccion->setObjAprendizaje(objAprendizaje);
+}
+
+void Controlador::AltaLeccion() {
+    // 1 agregateLeccion()
+    Leccion* Lec = this->auxCurso->AgregateLeccion(this->auxDTLeccion);
+
+    this->auxCurso->AgregateEjercicio(this->auxDTEjercicios, Lec);
+}
+
+
 
 /* FALTA HACER LINKS Y PASAR SET DE USUARIO POR REFERENCIA
 void Controlador::AltaUsuario() {

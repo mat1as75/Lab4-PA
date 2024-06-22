@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
-#include "Curso.h"
+#include "../Header/Curso.h"
+#include "../ICollection/interfaces/ICollectible.h"
 
 Curso::Curso() {
 }
@@ -34,4 +35,28 @@ string Curso::getDificultad() {
 				Dificultad = "Avanzado";
 	
 	return Dificultad;
+}
+
+Leccion* Curso::AgregateLeccion(DTLeccion* DTLec) {
+	// 1.1 L := create () : LECCION
+    ICollectible* Lec = new Leccion(DTLec->getTema(), DTLec->getObjAprendizaje());
+
+	// 1.2 add(L)
+    this->misLecciones->add(Lec);
+
+	return (Leccion*)Lec;
+}
+
+void Curso::AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion) {
+	// [for all DATAEJERCICIO in set<DATAEJERCICIO>]
+	// 2* AgregateEjercicio(DATAEJERCICIO)
+	IIterator* iter = DTEjercicios->getIterator();
+
+	while (iter->hasCurrent()) {
+		// Convierto el ICollectible a DTEjercicio
+		DTEjercicio* ej = (DTEjercicio*) iter->getCurrent();
+		Leccion->AgregateEjercicio(ej);
+		iter->next();
+	}
+
 }

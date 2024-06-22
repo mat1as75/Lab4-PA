@@ -18,14 +18,14 @@
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 //#include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
-#include "Header/ICo.h"
+#include "../ICo.h"
 using namespace std;
 
 class Estudiante: public Usuario{
 protected:
 	string paisRes;
 	Date* fecnac;
-        ICollection* misInscripciones;
+	ICollection* misInscripciones;
 public:
 	Estudiante();
 	~Estudiante();
