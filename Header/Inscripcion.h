@@ -1,0 +1,36 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/class.h to edit this template
+ */
+
+/* 
+ * File:   Inscripcion.h
+ * Author: matia
+ *
+ * Created on 15 de junio de 2024, 10:35 p. m.
+ */
+
+#ifndef INSCRIPCION_H
+#define INSCRIPCION_H
+
+#include <string>
+#include <vector>
+#include "../Date.h"
+#include "../Estudiante.h"
+#include "../Curso.h"
+#include "../ICollection/interfaces/ICollectible.h"
+
+class Inscripcion: public ICollectible{
+private:
+    Date* fechaInscripcion;
+    float progresoCurso;
+    Estudiante* miEstudiante;
+    Curso* miCurso;
+public:
+    Inscripcion();
+    Inscripcion(const Inscripcion& orig);
+    virtual ~Inscripcion();
+};
+
+#endif /* INSCRIPCION_H */
+
