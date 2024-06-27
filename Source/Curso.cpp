@@ -60,3 +60,17 @@ void Curso::AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion) {
 	}
 
 }
+
+void Curso::agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev){
+	
+	this->cursosPrevios->add(nombreCPrev, cPrev);
+
+}
+void Curso::agregateIdioma(Idioma* idiomaDeCurso){
+	this->idiomaCurso = idiomaDeCurso;
+}
+
+void Curso::agregateProfesor(Profesor* profDeCurso){
+	this->profesor = profDeCurso;
+	
+}

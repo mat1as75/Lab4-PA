@@ -4,7 +4,7 @@ DTEstudiante::DTEstudiante() {
 	
 }
 
-DTEstudiante::DTEstudiante(string nombre, string descripcion, string paisRes): DATAUSUARIO(nombre,descripcion) {
+DTEstudiante::DTEstudiante(string nombre, string descripcion, string paisRes): DTUsuario(nombre,descripcion) {
 	this->paisRes=paisRes;
 }
 

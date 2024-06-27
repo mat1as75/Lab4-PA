@@ -5,10 +5,11 @@
 
 #include <iostream>
 #include <string>
-#include "../Header/Controlador.h"
-#include "../ICo.h"
-#include "../Header/Usuario.h"
-#include "../Header/Curso.h"
+#include "Header/Controlador.h"
+#include "ICo.h"
+#include "Header/Usuario.h"
+#include "Header/Curso.h"
+#include "DataTypes/DTCurso.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;

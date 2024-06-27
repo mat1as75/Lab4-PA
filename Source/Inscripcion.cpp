@@ -10,7 +10,8 @@
  * Created on 15 de junio de 2024, 10:35 p. m.
  */
 
-#include "../Estudiante.h"
+#include "Header/Estudiante.h"
+#include "Header/Inscripcion.h"
 
 Inscripcion::Inscripcion() {
 }

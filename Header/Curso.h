@@ -22,6 +22,7 @@
 #include "DTLeccion.h"
 #include "../ICo.h"
 #include "ICollection/interfaces/ICollectible.h"
+#include "Profesor.h"
 using namespace std;
 
 enum Dificultad {
@@ -35,6 +36,7 @@ private:
 	string nombreCurso;
 	string descrpicionCurso;
 	Dificultad dificultad;
+	Profesor* profeCurso;
 	Idioma* idiomaCurso; /* Idioma que se ensena en el Curso */
 	ICollection* cursosPrevios; /* Lista de cursos previos */
 	ICollection* misLecciones; /* Lista de lecciones */
@@ -46,6 +48,9 @@ public:
 	string getDificultad();
 	Leccion* AgregateLeccion(DTLeccion* DTLec);
 	void AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion);
+	void agregateProfesor(Profesor* profDeCurso);
+	void agregateIdioma(Idioma* idiomaDeCurso);
+	void agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev);
 	/* Hacer Oper para obtener Cursos Previos */
 };
 

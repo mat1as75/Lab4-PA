@@ -17,6 +17,7 @@ Profesor::Profesor(string nickname, string password, string nombreUsuario, strin
 	this->nombreUsuario = nombreUsuario;
 	this->descripcionUsuario = descripcionUsuario;
 	this->instituto = instituto;
+	this->idiomasEspecializado=new OrderedDictionary();
 }
 
 string Profesor::getInstituto() {
@@ -25,4 +26,20 @@ string Profesor::getInstituto() {
 
 string Profesor::toString() {
 	return "Profesor: " + this->nickname + ", " + this->nombreUsuario  + ", " + this->instituto;
+}
+IDictionary* Profesor::getIdiomasEspecializado(){
+	
+	return this->idiomasEspecializado;
+}
+DTUsuario* Profesor::getInfo(){
+	DTUsuario* dataP= new DTProfesor(this->getNombreU(),this->getDescripcionU(),this->getInstituto(),this->getIdiomasEspecializado());
+	return dataP;
+}
+void Profesor::setIdiomasEspecializado(IKey* key, ICollectible* collect){
+	
+	this->idiomasEspecializado->add(key,collect);
+	cout<<"ldssd"<<endl;
+}
+void Profesor::setIdiomasEspecializado(IDictionary* idiomas){
+	this->idiomasEspecializado=idiomas;
 }

@@ -16,6 +16,7 @@
 #include "Usuario.h" /* Dependencia en Diagrama de Clases */
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
+#include "DTUsuario.h"
 using namespace std;
 
 class Profesor: public Usuario {

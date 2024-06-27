@@ -9,7 +9,7 @@ DTCurso::DTCurso() {
 DTCurso::DTCurso(string nombreCurso,string nombreProfesor,string descripcionCurso,string nombreIdioma, Dificultad dificultad, int cantLecciones, int cantEjercicios){
 	this->nombreCurso=nombreCurso;
 	this->nombreProfesor= nombreProfesor;
-	this->descripcionCurso=descripcionCurso;
+	this->descCurso=descripcionCurso;
 	this->nombreIdioma=nombreIdioma;
 	this->dificultad=dificultad;
 	this->cantLecciones= cantLecciones;

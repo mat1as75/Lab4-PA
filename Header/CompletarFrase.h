@@ -13,7 +13,7 @@
 #ifndef COMPLETARFRASE_H
 #define COMPLETARFRASE_H
 
-#include <Ejercicio.h>
+#include "Ejercicio.h"
 using namespace std;
 
 class CompletarFrase: public Ejercicio{
@@ -24,6 +24,7 @@ public:
   CompletarFrase();
   ~CompletarFrase();
   CompletarFrase(string nombreEjericio, string descripcionEjercicio, string fraseIncompleta, vector<string> palabrasSolucion);
+  string toString() override;
 };
 
 #endif /* COMPLETARFRASE_H */

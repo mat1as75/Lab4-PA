@@ -45,7 +45,7 @@ public:
 	virtual void buscarCursoPrevio(string nombreCursoPrev)=0;
 	virtual bool AltaCurso()=0;
     virtual vector <string> listarUsuarios()=0;
-    virtual DATAUSUARIO* mostrarInfoUsuario(string nickname)=0;
+    virtual DTUsuario* mostrarInfoUsuario(string nickname)=0;
 };
 
 #endif /* ICONTROLADOR_H */
