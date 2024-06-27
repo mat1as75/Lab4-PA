@@ -32,11 +32,10 @@ public:
 	~IControlador();
     //virtual Usuario* ingresarEstudiante(string nicknameEstudiante, string passEstudiante, string nombreEstudiante, string descEstudiante, string paisResEstudiante, Date* fecNacEstudiante) = 0;
     //virtual Usuario* ingresarProfesor(string nicknameProfesor, string passProfesor, string nombreProfesor, string descProfesor, string institutoProfesor) = 0;
-    virtual void AltaUsuario() = 0;
     virtual vector<string> listarCursosNoHabilitados() = 0;
     virtual void SeleccionarCurso(string nombreCurso) = 0;
     virtual void IngresarDatosLeccion(string tema, string objAprendizaje) = 0;
-    virtual void AltaLeccion() = 0;
+    //virtual void AltaLeccion() = 0;
     virtual vector <string> listarIdiomasEspecializados()=0;
 	virtual vector <string> listarProfesores()=0;
 	virtual void ingresarDatosCurso(string nicknameP, string nombre, string descripcion, Dificultad dif)=0;

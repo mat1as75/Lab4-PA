@@ -37,7 +37,7 @@ string Curso::getDificultad() {
 	return Dificultad;
 }
 
-Leccion* Curso::AgregateLeccion(DTLeccion* DTLec) {
+/*Leccion* Curso::AgregateLeccion(DTLeccion* DTLec) {
 	// 1.1 L := create () : LECCION
     ICollectible* Lec = new Leccion(DTLec->getTema(), DTLec->getObjAprendizaje());
 
@@ -45,7 +45,7 @@ Leccion* Curso::AgregateLeccion(DTLeccion* DTLec) {
     this->misLecciones->add(Lec);
 
 	return (Leccion*)Lec;
-}
+}*/
 
 void Curso::AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion) {
 	// [for all DATAEJERCICIO in set<DATAEJERCICIO>]
@@ -63,7 +63,7 @@ void Curso::AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion) {
 
 void Curso::agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev){
 	
-	this->cursosPrevios->add(nombreCPrev, cPrev);
+	this->cursosPrevios->add(nombreCPrev ,cPrev);
 
 }
 void Curso::agregateIdioma(Idioma* idiomaDeCurso){
@@ -71,6 +71,6 @@ void Curso::agregateIdioma(Idioma* idiomaDeCurso){
 }
 
 void Curso::agregateProfesor(Profesor* profDeCurso){
-	this->profesor = profDeCurso;
+	this->profeCurso = profDeCurso;
 	
 }

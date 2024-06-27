@@ -9,7 +9,7 @@
 #include "ICo.h"
 #include "Header/Usuario.h"
 #include "Header/Curso.h"
-#include "DataTypes/DTCurso.h"
+#include "DTCurso.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;
@@ -88,13 +88,12 @@ void Controlador::IngresarDatosLeccion(string tema, string objAprendizaje) {
     this->auxDTLeccion->setObjAprendizaje(objAprendizaje);
 }
 
-void Controlador::AltaLeccion() {
+/*void Controlador::AltaLeccion() {
     // 1 agregateLeccion()
     Leccion* Lec = this->auxCurso->AgregateLeccion(this->auxDTLeccion);
 
     this->auxCurso->AgregateEjercicio(this->auxDTEjercicios, Lec);
-}
-
+}*/
 vector <string> Controlador::listarIdiomasEspecializados(){
 	vector<string> listaIdiomasEsp;
 	

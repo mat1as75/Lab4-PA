@@ -5,6 +5,8 @@ DTProfesor::DTProfesor() {
 	
 }
 
+
+
 DTProfesor::DTProfesor(string nombre, string descripcion,string instituto, IDictionary* idiomasEspecializado): DATAUSUARIO(nombre,descripcion){
 	this->idiomasEspecializado=new OrderedDictionary();
 	this->instituto=instituto;

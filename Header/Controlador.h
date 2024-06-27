@@ -77,7 +77,7 @@ public:
     vector<string> listarCursosNoHabilitados();
     void SeleccionarCurso(string nombreCurso);
     void IngresarDatosLeccion(string tema, string objAprendizaje);
-    void AltaLeccion();
+   // void AltaLeccion();
 
     /*Consulta Usuario*/
 

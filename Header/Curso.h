@@ -22,6 +22,7 @@
 #include "DTLeccion.h"
 #include "../ICo.h"
 #include "ICollection/interfaces/ICollectible.h"
+#include "ICollection/interfaces/IDictionary.h"
 #include "Profesor.h"
 using namespace std;
 
@@ -38,15 +39,15 @@ private:
 	Dificultad dificultad;
 	Profesor* profeCurso;
 	Idioma* idiomaCurso; /* Idioma que se ensena en el Curso */
-	ICollection* cursosPrevios; /* Lista de cursos previos */
-	ICollection* misLecciones; /* Lista de lecciones */
+	IDictionary* cursosPrevios; /* Lista de cursos previos */
+	IDictionary* misLecciones; /* Lista de lecciones */
 public:
 	Curso();
 	~Curso();
 	Curso(string nombreCurso, string descrpicionCurso, Dificultad dificultad);
 	string getNombreCurso();
 	string getDificultad();
-	Leccion* AgregateLeccion(DTLeccion* DTLec);
+	//Leccion* AgregateLeccion(DTLeccion* DTLec);
 	void AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion);
 	void agregateProfesor(Profesor* profDeCurso);
 	void agregateIdioma(Idioma* idiomaDeCurso);
