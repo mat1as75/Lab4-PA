@@ -15,5 +15,5 @@ Fabrica::~Fabrica() {
 }
 
 IControlador* Fabrica::getControlador() {
-    return (new Controlador());
+    Controlador::getInstance();
 }

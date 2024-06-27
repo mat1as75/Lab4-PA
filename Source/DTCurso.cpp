@@ -18,3 +18,19 @@ DTCurso::DTCurso(string nombreCurso,string nombreProfesor,string descripcionCurs
 DTCurso::~DTCurso() {
 	
 }
+
+ DTCurso::DTCurso(string nombreCurso, string descCurso, Dificultad dif){
+    this->nombreCurso = nombreCurso;
+    this->descCurso = descCurso;
+    this->dificultad = dif;
+ }
+
+string DTCurso:: getNombreCurso(){
+    return this->nombreCurso;
+}
+string DTCurso:: getDescCurso(){
+       return this->descCurso;
+}
+Dificultad DTCurso:: getDificultad(){
+    return this->dificultad;
+}

@@ -1,5 +1,5 @@
 #include "../Header/CompletarFrase.h"
-
+/*
 CompletarFrase::CompletarFrase() {
 
 }
@@ -14,6 +14,6 @@ CompletarFrase::CompletarFrase(string nombreEjericio, string descripcionEjercici
     this->fraseIncompleta = fraseIncompleta;
     this->palabrasSolucion = palabrasSolucion;
 }
-
+*/
 
 

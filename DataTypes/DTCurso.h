@@ -29,7 +29,13 @@ private:
 public:
     DTCurso();
     DTCurso(string nombreCurso,string nombreProfesor,string descripcionCurso,string nombreIdioma, Dificultad dificultad, int cantLecciones, int cantEjercicios);
-    virtual ~DTCurso(); 
+    DTCurso(string nombreCurso, string descCurso, Dificultad dif);
+    virtual ~DTCurso();
+    string getNombreCurso();
+    string getDescCurso();
+    Dificultad getDificultad();
+
+
 };
 
 #endif /* DTCURSO_H */

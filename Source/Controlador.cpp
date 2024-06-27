@@ -129,9 +129,7 @@ void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string des
 	
 	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->misProfesores->find(key));
 	
-	this->cursoACrear->nombreCurso=nombre;
-	this->cursoACrear->descCurso=descripcion;
-	this->cursoACrear->dificultad=dif;
+	this->cursoACrear= new DTCurso(nombre, descripcion, dif);
 }
 
 void Controlador::buscarIdioma(string nombreIdioma){
@@ -165,10 +163,10 @@ void Controlador::buscarCursoPrevio(string nombreCursoPrev){
 
 bool Controlador::AltaCurso(){
 	bool retorno;
-	string nombreC = this->cursoACrear->nombreCurso;
+	string nombreC = this->cursoACrear->getNombreCurso();
 	const char* curso=nombreC.c_str();
-	string desc = this->cursoACrear->descCurso;
-	Dificultad dif = this->cursoACrear->dificultad;
+	string desc = this->cursoACrear->getDescCurso();
+	Dificultad dif = this->cursoACrear->getDificultad();
 	IKey* ik=new String(curso);
 	bool existe= this->CursosHabilitados->member(ik);
 	if(!existe){
@@ -196,7 +194,7 @@ bool Controlador::AltaCurso(){
 			//###########################################
 			
 			
-			this->CursosNoHabilitados->add(ik,(ICollectible*)cursoNuevo);
+			this->CursosNoHabilitados->add(ik, cursoNuevo);
 			retorno = true;
 		}
 		else{
