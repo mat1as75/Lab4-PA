@@ -14,6 +14,7 @@
 #define DTCURSO_H
 
 #include <string>
+#include "Header/Curso.h"
 using namespace std;
 
 class DTCurso {
@@ -22,11 +23,12 @@ private:
     string descCurso;
     string nombreProfesor;
     string nombreIdioma;
+    Dificultad dificultad;
     int cantLecciones;
     int cantEjercicios;
 public:
     DTCurso();
-    DTCurso(const DTCurso& orig);
+    DTCurso(string nombreCurso,string nombreProfesor,string descripcionCurso,string nombreIdioma, Dificultad dificultad, int cantLecciones, int cantEjercicios);
     virtual ~DTCurso(); 
 };
 

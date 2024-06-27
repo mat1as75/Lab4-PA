@@ -22,6 +22,7 @@
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
 #include "DTLeccion.h"
+#include "DTCurso.h"
 using namespace std;
 
 class Controlador: public IControlador {
@@ -33,10 +34,16 @@ protected:
     IDictionary* Estudiantes;
     IDictionary* Profesores;
     IDictionary* Idiomas;
-
+    IDictionary* auxCursosPrev;//la coleccion de cursos previos para cuando quiero crear un curso
+    Profesor* auxProfDeCurso;//auxiliar con el profesor del curso que quiero probar
+	Idioma* auxIdiomaDeCurso;//auxiliar con el idioma del curso por crear
     Curso* auxCurso; // Puntero auxiliar al curso para la oper SelecionarCurso()
     DTLeccion* auxDTLeccion; // Datatype Leccion auxiliar
+    DTCurso* cursoACrear; //auxiliar con los datos del curso a crear   
     ICollection* auxDTEjercicios; // Coleccion Datatype Ejecicio auxiliar
+    string nickname,contrasena,nombre,descripcion,paisRes,instituto; //auxiliares para alta usuario
+    Date* fecNac;
+    IDictionary* misIdiomasAuxiliares;// coleccion auxiliar de idiomas para crear profesor
 public:
     static Controlador* getInstance(); // 3 de Singleton
     virtual ~Controlador();
@@ -47,6 +54,7 @@ public:
     IDictionary* getEstudiantes();
     IDictionary* getProfesores();
     IDictionary* getIdiomas();
+
     
     //Usuario* ingresarEstudiante(string nicknameEstudiante, string passEstudiante, string nombreEstudiante, string descEstudiante, string paisResEstudiante, Date* fecNacEstudiante) override;
     //Usuario* ingresarProfesor(string nicknameProfesor, string passProfesor, string nombreProfesor, string descProfesor, string institutoProfesor) override;
@@ -55,14 +63,35 @@ public:
         de dicho usuario en el sistema
             (haciendo los links)*/
     
-    void AltaUsuario();
 
+    /* Alta Usuario*/
+
+    void ingresarDatosEstudiante(string nickname, string contrasena, string nombre, string descripcion, string paisRes, Date* fecNac);
+	void ingresarDatosProfesor(string nickname, string contrasena, string nombre, string descripcion, string instituto);
+    vector <string>listarIdiomasDisponibles();
+    void ingresarIdiomaEspecializado(string nombreIdioma);
+    bool altaUsuario();
+
+    bool ingresarIdioma(string idioma);
     /* Agregar Leccion */
     vector<string> listarCursosNoHabilitados();
     void SeleccionarCurso(string nombreCurso);
     void IngresarDatosLeccion(string tema, string objAprendizaje);
     void AltaLeccion();
+
+    /*Consulta Usuario*/
+
+    vector <string> listarUsuarios();
+    DTUsuario* mostrarInfoUsuario(string nickname);
     
+    /*Alta Curso*/
+    vector <string> listarIdiomasEspecializados();
+	vector <string> listarProfesores();
+	void ingresarDatosCurso(string nicknameP, string nombre, string descripcion, Dificultad dif);
+	void buscarIdioma(string nombreIdioma);
+	vector <string> listarCursosHabilitados();
+	void buscarCursoPrevio(string nombreCursoPrev);
+	bool AltaCurso();
 };
 
 #endif /* CONTROLADOR_H */

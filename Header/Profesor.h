@@ -28,7 +28,12 @@ public:
 	Profesor(string nickname, string password, string nombreUsuario, string descripcionUsuario, string instituto);
 	string getInstituto();
 	string toString() override;
-	Curso* proponerCurso(string nombreCurso, string descripcionCurso, Dificultad dificultad /* Agregar lista de Cursos Previos */);
+	IDictionary* getIdiomasEspecializado();
+	void setIdiomasEspecializado(IKey* key, ICollectible* collect);
+	void setIdiomasEspecializado(IDictionary* idiomas);
+	DTUsuario* getInfo() ;
+
+	//Curso* proponerCurso(string nombreCurso, string descripcionCurso, Dificultad dificultad /* Agregar lista de Cursos Previos */);
 };
 
 #endif /* PROFESOR_H */

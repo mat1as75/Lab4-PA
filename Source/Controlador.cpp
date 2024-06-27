@@ -14,7 +14,19 @@ using namespace std;
 Controlador* Controlador::miInstancia = nullptr;
 
 Controlador::Controlador() {
+	this->Estudiantes=new OrderedDictionary();
+	this->Profesores= new OrderedDictionary();
+	this->Idiomas=new OrderedDictionary();
+	this->misIdiomasAuxiliares=new OrderedDictionary();
+    this->CursosHabilitados=new OrderedDictionary();
+    this->CursosNoHabilitados=new OrderedDictionary();
+    this->auxCursosPrev=new OrderedDictionary();
+    this->auxIdiomaDeCurso=new Idioma;
+    this->auxProfDeCurso=new Profesor;
+    this->cursoACrear=new DTCurso;
+
 }
+
 
 Controlador* Controlador::getInstance() {
     if (Controlador::miInstancia == nullptr) {
@@ -81,6 +93,241 @@ void Controlador::AltaLeccion() {
 
     this->auxCurso->AgregateEjercicio(this->auxDTEjercicios, Lec);
 }
+
+vector <string> Controlador::listarIdiomasEspecializados(){
+	vector<string> listaIdiomasEsp;
+	
+	cout<<"Los idiomas especializados de este profesor son:\n " <<endl;
+	IIterator* it=this->auxProfDeCurso->getIdiomasEspecializado()->getIterator();
+	while(it->hasCurrent()){
+		Idioma* nuevoIdioma=(Idioma*)it->getCurrent();
+
+		listaIdiomasEsp.push_back(nuevoIdioma->getNombreIdioma());
+		it->next();
+	}
+	return listaIdiomasEsp;
+	
+}
+
+vector <string> Controlador::listarProfesores(){
+	vector<string> listaProfesores;
+	IIterator* it=this->Profesores->getIterator();
+	while(it->hasCurrent()){
+		Profesor* profe=(Profesor*) it->getCurrent();
+		listaProfesores.push_back(profe->getNickname());
+		it->next();
+	}
+	
+	return listaProfesores;
+	
+}
+
+void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string descripcion, Dificultad dif){
+	const char* profe=nicknameP.c_str();
+	IKey* key=new String(profe);
+	
+	
+	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->misProfesores->find(key));
+	
+	this->cursoACrear->nombreCurso=nombre;
+	this->cursoACrear->descCurso=descripcion;
+	this->cursoACrear->dificultad=dif;
+}
+
+void Controlador::buscarIdioma(string nombreIdioma){
+	const char* idioma=nombreIdioma.c_str();
+	IKey* key=new String(idioma);
+	this->auxIdiomaDeCurso = dynamic_cast<Idioma*>(this->misIdiomas->find(key));
+}
+
+vector <string> Controlador::listarCursosHabilitados(){
+	vector<string> listaCursosHab;
+	IIterator* it=this->CursosHabilitados->getIterator();
+	while(it->hasCurrent()){
+		Curso* curso=(Curso*) it->getCurrent();
+		listaCursosHab.push_back(curso->getNombreCurso());
+		it->next();
+	}
+	
+	return listaCursosHab;
+}
+
+void Controlador::buscarCursoPrevio(string nombreCursoPrev){
+	const char* cursoP=nombreCursoPrev.c_str();
+	IKey* key=new String(cursoP);
+	
+	
+	ICollectible* auxCursoPrevio = this->CursosHabilitados->find(key);
+	this->auxCursosPrev->add(key,auxCursoPrevio);
+	
+	
+}
+
+bool Controlador::AltaCurso(){
+	bool retorno;
+	string nombreC = this->cursoACrear->nombreCurso;
+	const char* curso=nombreC.c_str();
+	string desc = this->cursoACrear->descCurso;
+	Dificultad dif = this->cursoACrear->dificultad;
+	IKey* ik=new String(curso);
+	bool existe= this->CursosHabilitados->member(ik);
+	if(!existe){
+		existe = this->CursosNoHabilitados->member(ik);
+		if(!existe){
+			Curso* cursoNuevo = new Curso(nombreC,desc,dif);
+			cursoNuevo->agregateProfesor(this->auxProfDeCurso);
+			cursoNuevo->agregateIdioma(this->auxIdiomaDeCurso);
+			bool cPrevios = this->auxCursosPrev->isEmpty();
+			if(!cPrevios){
+				IIterator* it =this->auxCursosPrev->getIterator();
+				while(it->hasCurrent()){
+					Curso* cPrev = (Curso*) it->getCurrent();
+					const char* nombreCPrev=cPrev->getNombreCurso().c_str();
+					IKey* key = new String(nombreCPrev);
+					cursoNuevo->agregateCursoPrevio(key, cPrev);
+					this->misIdiomasAuxiliares->remove(key);
+					it->next();
+				}
+			}
+			//###########################################
+			//###########################################
+			//!!!!!!! Las Lecciones y ejercicios!!!!!!!!!
+			//###########################################
+			//###########################################
+			
+			
+			this->CursosNoHabilitados->add(ik,(ICollectible*)cursoNuevo);
+			retorno = true;
+		}
+		else{
+			bool cPrevios = this->auxCursosPrev->isEmpty();
+			if(!cPrevios){
+				IIterator* it =this->auxCursosPrev->getIterator();
+				while(it->hasCurrent()){
+					Curso* cPrev = (Curso*) it->getCurrent();
+					const char* nombreCPrev=cPrev->getNombreCurso().c_str();
+					IKey* key = new String(nombreCPrev);
+					this->misIdiomasAuxiliares->remove(key);
+					it->next();
+				}
+			}
+			this->auxProfDeCurso = NULL;
+			this->auxIdiomaDeCurso = NULL;
+			delete this->cursoACrear;
+			retorno = false;
+		}
+		
+	}else{
+		bool cPrevios = this->auxCursosPrev->isEmpty();
+		if(!cPrevios){
+			IIterator* it =this->auxCursosPrev->getIterator();
+			while(it->hasCurrent()){
+				Curso* cPrev = (Curso*) it->getCurrent();
+				const char* nombreCPrev=cPrev->getNombreCurso().c_str();
+				IKey* key = new String(nombreCPrev);
+				this->misIdiomasAuxiliares->remove(key);
+				it->next();
+			}
+		}
+		this->auxProfDeCurso = NULL;
+		this->auxIdiomaDeCurso = NULL;
+		delete this->cursoACrear;
+		retorno = false;
+	}
+	
+	return retorno;
+}
+
+
+/*Alta Usuario*/
+
+void Controlador::ingresarDatosEstudiante(string nickname, string contrasena, string nombre, string descripcion, string paisRes, Date* fecNac){
+	this->nickname=nickname;
+	this->contrasena=contrasena;
+	this->nombre=nombre;
+	this->descripcion=descripcion;
+	this->fecNac=fecNac;
+	this->paisRes=paisRes;
+}
+
+void Controlador::ingresarDatosProfesor(string nickname, string contrasena, string nombre, string descripcion, string instituto){
+	this->nickname=nickname;
+	this->contrasena=contrasena;
+	this->nombre=nombre;
+	this->descripcion=descripcion;
+	this->instituto=instituto;
+}
+
+IDictionary* Controlador::getProfesores(){
+	return this->Profesores;
+}
+
+bool Controlador::altaUsuario(){
+	
+	bool retorno;
+	if (this->paisRes.compare("")!=0){ // si hay datos de Estudiante ingresados(paisRes)
+		
+		const char* nick=this->nickname.c_str(); // convierto string a char*
+		IKey* ik=new String(nick);
+		
+		bool existe= this->Estudiantes->member(ik);
+		if(!existe){
+			ICollectible* estudiante = new Estudiante(this->nickname,this->contrasena,this->nombre,this->descripcion,this->paisRes,this->fecNac);
+			this->Estudiantes->add(ik,estudiante);
+			this->paisRes="";
+			retorno= true;
+		}else{
+			
+			retorno= false;
+		}
+	}else if(this->instituto.compare("")!=0){ // si la variable instituto no esta vacia significa que hay un PROFESOR ingresado
+		
+		const char* nick=this->nickname.c_str(); // convierto string a char*
+		IKey* ik = new String(nick);
+		bool existe = this->Profesores->member(ik);
+		if(!existe){
+			
+			Profesor* profesor = new Profesor(this->nickname,this->contrasena,this->nombre,this->descripcion,this->instituto);
+			IIterator* it =this->misIdiomasAuxiliares->getIterator();
+			
+			while(it->hasCurrent()){
+				Idioma* idiomaAux=(Idioma*)it->getCurrent();
+				const char* idioma=idiomaAux->getNombreIdioma().c_str();
+				IKey* nuevaIK= new String(idioma);
+
+				profesor->getIdiomasEspecializado()->add(nuevaIK,it->getCurrent());
+				this->misIdiomasAuxiliares->remove(nuevaIK);
+				it->next();
+				
+			}
+
+			
+			this->Profesores->add(ik,(ICollectible*)profesor);
+			
+			this->instituto="";
+			retorno= true;
+		}else{
+			IIterator* it = this->misIdiomasAuxiliares->getIterator();
+			while(it->hasCurrent()){
+				Idioma* idioma = (Idioma*) it->getCurrent();
+				const char* nombreIdioma=idioma->getNombreIdioma().c_str();
+				IKey* key = new String(nombreIdioma);
+			
+				this->misIdiomasAuxiliares->remove(key);
+				
+				it->next();
+			}
+		
+			retorno= false;
+		}
+	}
+	return retorno;
+}
+
+
+
+
+
 
 
 
