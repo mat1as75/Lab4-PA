@@ -16,14 +16,16 @@
 #include <string>
 #include <vector>
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
-//#include "Profesor.h" /* Dependencia en Diagrama de Clases */
-//include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
+class Profesor;
+class Inscripcion;
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
 #include "DTLeccion.h"
 #include "../ICo.h"
 #include "ICollection/interfaces/ICollectible.h"
 #include "ICollection/interfaces/IDictionary.h"
 #include "Profesor.h"
+#include "../DataTypes/DTCompletarFrase.h"
+#include "../DataTypes/DTTraduccion.h"
 using namespace std;
 
 enum Dificultad {
@@ -40,19 +42,29 @@ private:
 	Profesor* profeCurso;
 	Idioma* idiomaCurso; /* Idioma que se ensena en el Curso */
 	IDictionary* cursosPrevios; /* Lista de cursos previos */
+	IDictionary* soyPrevioDe; /* Coleccion de cursos de los que soy previo */
 	IDictionary* misLecciones; /* Lista de lecciones */
+	IDictionary* misInscripciones; /* Coleccion de inscripciones */
 public:
 	Curso();
 	~Curso();
 	Curso(string nombreCurso, string descrpicionCurso, Dificultad dificultad);
 	string getNombreCurso();
 	string getDificultad();
-	//Leccion* AgregateLeccion(DTLeccion* DTLec);
-	void AgregateEjercicio(ICollection* DTEjercicios, Leccion* Leccion);
+
 	void agregateProfesor(Profesor* profDeCurso);
 	void agregateIdioma(Idioma* idiomaDeCurso);
 	void agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev);
-	/* Hacer Oper para obtener Cursos Previos */
+
+	/* Operaciones de AltaLeccion */
+	void AgregateLeccion(DTLeccion* DTLec);
+	void AgregateEjercicio(IDictionary* DTEjercicios);
+
+	/* Operaciones de EliminarCurso */
+    void EliminarProfesor();
+    void EliminarInscripciones();
+    void EliminarCursoPrevio(Curso* c);
+
 };
 
 #endif /* CURSO_H */

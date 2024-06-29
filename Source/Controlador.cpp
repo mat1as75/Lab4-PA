@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 #include "Header/Controlador.h"
-#include "ICo.h"
 #include "Header/Usuario.h"
 #include "Header/Curso.h"
 #include "DTCurso.h"
@@ -62,7 +61,8 @@ vector<string> Controlador::listarCursosNoHabilitados() {
 
 	/* Recorro coleccion de cursos no habilitados */
     while(iter->hasCurrent()) {
-        nombresNoHabilitados.push_back(dynamic_cast<Curso*>(iter->getCurrent())->getNombreCurso());
+		Curso* c = (Curso*) iter->getCurrent();
+        nombresNoHabilitados.push_back(c->getNombreCurso());
         iter->next(); // Siguiente
     }
 
@@ -70,16 +70,9 @@ vector<string> Controlador::listarCursosNoHabilitados() {
 }
 
 void Controlador::SeleccionarCurso(string nombreCurso) {
-    IIterator* iter = this->CursosNoHabilitados->getIterator();
-    while(iter->hasCurrent()) {
-        // Si lo encuentra lo guardo en ptr auxiliar
-        if(((Curso*)iter->getCurrent())->getNombreCurso() == nombreCurso) {
-            this->auxCurso = dynamic_cast<Curso*>(iter->getCurrent());
-            break;
-        }
-        iter->next(); // Siguiente
-    }
-
+    const char* nombreC = nombreCurso.c_str();
+    OrderedKey* ik = new String(nombreC);
+    this->cursoSeleccionado = (Curso*)this->CursosNoHabilitados->find(ik);
 }
 
 void Controlador::IngresarDatosLeccion(string tema, string objAprendizaje) {
@@ -88,12 +81,71 @@ void Controlador::IngresarDatosLeccion(string tema, string objAprendizaje) {
     this->auxDTLeccion->setObjAprendizaje(objAprendizaje);
 }
 
-/*void Controlador::AltaLeccion() {
+void Controlador::AltaLeccion() {
     // 1 agregateLeccion()
-    Leccion* Lec = this->auxCurso->AgregateLeccion(this->auxDTLeccion);
+    this->cursoSeleccionado->AgregateLeccion(this->auxDTLeccion);
 
-    this->auxCurso->AgregateEjercicio(this->auxDTEjercicios, Lec);
-}*/
+    this->cursoSeleccionado->AgregateEjercicio(this->DTEjerciciosAux);
+}
+
+void Controlador::IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) {
+    DTCompletarFrase* aux = new DTCompletarFrase("CF", nombreEjercicio, descripcion, fraseACompletar, palabrasSolucion);
+    
+    const char* nombreC = aux->getNombreEjercicio().c_str();
+    OrderedKey* ik = new String(nombreC);
+    
+    /* Agrego DTEjercicio a coleccion de DTEjercicios auxiliar */
+    this->DTEjerciciosAux->add(ik, dynamic_cast<ICollectible*> aux);
+}
+
+void Controlador::IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) {
+    DTTraduccion* aux = new DTTraduccion("T", nombreEjercicio, descripcion, fraseATraducir, fraseTraducida);
+    
+    const char* nombreC = aux->getNombreEjercicio().c_str();
+    OrderedKey* ik = new String(nombreC);
+    
+    /* Agrego DTEjercicio a coleccion de DTEjercicios auxiliar */
+    this->DTEjerciciosAux->add(ik, dynamic_cast<ICollectible*> aux);
+}
+
+vector<string> Controlador::ListarCursos() {
+    vector<string> nombresCursos;
+    
+    /* Recorro coleccion de cursos habilitados */
+    IIterator* it1 = this->CursosHabilitados->getIterator();
+    while(it1->hasCurrent()) {
+        Curso* c = (Curso*) it1->getCurrent();
+        nombresCursos.push_back(c->getNombreCurso());
+        it1->next();
+    }
+    
+    /* Recorro coleccion de cursos no habilitados */
+    IIterator* it2 = this->CursosNoHabilitados->getIterator();
+    while(it2->hasCurrent()) {
+        Curso* c = (Curso*) it2->getCurrent();
+        nombresCursos.push_back(c->getNombreCurso());
+        it2->next();
+    }
+    
+    return nombresCursos;
+}
+
+void Controlador::EliminarCurso(string nombreCurso) {
+    /* 1 C := find(nombreCurso) : CURSO */
+    const char* nombreC = nombreCurso.c_str();
+    OrderedKey* ik = new String(nombreC);
+    Curso* c = (Curso*)this->CursosHabilitados->find(ik);
+    
+    if(c == NULL) { /* Si no lo encuentra */
+        /* 2 C := find(nombreCurso) : CURSO */
+        c = (Curso*)this->CursosNoHabilitados->find(ik);
+    }
+    
+    c->EliminarProfesor(); /* 3 EliminarProfesor() */
+    c->EliminarInscripciones(); /* 4 EliminarInscripciones() */
+    delete(c); /* 5 destroy() */
+}
+
 vector <string> Controlador::listarIdiomasEspecializados(){
 	vector<string> listaIdiomasEsp;
 	
@@ -127,7 +179,7 @@ void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string des
 	IKey* key=new String(profe);
 	
 	
-	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->misProfesores->find(key));
+	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->Profesores->find(key));
 	
 	this->cursoACrear= new DTCurso(nombre, descripcion, dif);
 }
@@ -135,7 +187,7 @@ void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string des
 void Controlador::buscarIdioma(string nombreIdioma){
 	const char* idioma=nombreIdioma.c_str();
 	IKey* key=new String(idioma);
-	this->auxIdiomaDeCurso = dynamic_cast<Idioma*>(this->misIdiomas->find(key));
+	this->auxIdiomaDeCurso = dynamic_cast<Idioma*>(this->Idiomas->find(key));
 }
 
 vector <string> Controlador::listarCursosHabilitados(){

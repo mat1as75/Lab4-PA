@@ -18,13 +18,16 @@
 using namespace std;
 
 class DTTraduccion: public DTEjercicio {
-protected:
+private:
     string fraseATraducir;
-    string fraseTraducida;
+    string fraseSolucion;
 public:
     DTTraduccion();
-    DTTraduccion(string nombreEjercicio, string descEjercicio, string fraseATraducir, string fraseTraducida);
+    DTTraduccion(string tipoEjercicio, string nombreEjercicio, string descEjercicio, string fraseATraducir, string fraseSolucion);
     virtual ~DTTraduccion();
+
+    string getFraseATraducir();
+    string getFraseSolucion();
 };
 
 #endif /* DTTRADUCCION_H */

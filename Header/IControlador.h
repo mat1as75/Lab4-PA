@@ -30,12 +30,10 @@ private:
 public:
     IControlador();
 	~IControlador();
-    //virtual Usuario* ingresarEstudiante(string nicknameEstudiante, string passEstudiante, string nombreEstudiante, string descEstudiante, string paisResEstudiante, Date* fecNacEstudiante) = 0;
-    //virtual Usuario* ingresarProfesor(string nicknameProfesor, string passProfesor, string nombreProfesor, string descProfesor, string institutoProfesor) = 0;
+    
     virtual vector<string> listarCursosNoHabilitados() = 0;
     virtual void SeleccionarCurso(string nombreCurso) = 0;
     virtual void IngresarDatosLeccion(string tema, string objAprendizaje) = 0;
-    //virtual void AltaLeccion() = 0;
     virtual vector <string> listarIdiomasEspecializados()=0;
 	virtual vector <string> listarProfesores()=0;
 	virtual void ingresarDatosCurso(string nicknameP, string nombre, string descripcion, Dificultad dif)=0;
@@ -45,6 +43,20 @@ public:
 	virtual bool AltaCurso()=0;
     virtual vector <string> listarUsuarios()=0;
     virtual DTUsuario* mostrarInfoUsuario(string nickname)=0;
+
+    /* Operaciones de Agregar Leccion */
+    virtual vector<string> listarCursosNoHabilitados() = 0;
+    virtual void SeleccionarCurso(string nombreCurso) = 0;
+    virtual void IngresarDatosLeccion(string tema, string objAprendizaje) = 0;
+    virtual void AltaLeccion() = 0;
+    
+    /* Operaciones de Agregar Ejercicio */
+    virtual void IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) = 0;
+    virtual void IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) = 0;
+
+    /* Operaciones de Eliminar Curso */
+    virtual vector<string> ListarCursos() = 0;
+    virtual void EliminarCurso(string nombreCurso) = 0;
 };
 
 #endif /* ICONTROLADOR_H */

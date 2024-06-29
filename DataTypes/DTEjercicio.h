@@ -14,16 +14,29 @@
 #define DTEJERCICIO_H
 
 #include <string>
+#include <vector>
+#include "../ICo.h"
+#include "../ICollection/interfaces/ICollectible.h"
 using namespace std;
 
-class DTEjercicio {
+class DTEjercicio: public ICollectible{
 protected:
+    string tipoEjercicio;
     string nombreEjercicio;
     string descEjercicio;
 public:
     DTEjercicio();
-    DTEjercicio(const DTEjercicio& orig);
+    DTEjercicio(string tipoEjercicio, string nombre, string descripcion);
     virtual ~DTEjercicio();
+
+    string getTipoEjercicio();
+    string getNombreEjercicio();
+    string getDescEjercicio();
+
+    virtual string getFraseIncompleta() = 0;
+    virtual vector<string> getPalabrasSolucion() = 0;
+    virtual string getFraseATraducir() = 0;
+    virtual string getFraseSolucion() = 0;
 };
 
 #endif /* DTEJERCICIO_H */

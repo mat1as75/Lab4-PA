@@ -15,9 +15,10 @@
 
 #include <string>
 #include <vector>
-#include "../Date.h"
-#include "../Estudiante.h"
-#include "../Curso.h"
+#include "Date.h"
+#include "Estudiante.h"
+class Estudiante;
+#include "Curso.h"
 #include "../ICollection/interfaces/ICollectible.h"
 
 class Inscripcion: public ICollectible{
@@ -30,6 +31,10 @@ public:
     Inscripcion();
     Inscripcion(const Inscripcion& orig);
     virtual ~Inscripcion();
+    ICollectible* getCurso();
+
+    /* Operaciones de EliminarCurso */
+    void EliminarCurso(Curso* c);
 };
 
 #endif /* INSCRIPCION_H */

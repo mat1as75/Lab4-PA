@@ -23,7 +23,11 @@ private:
 public:
   Traduccion();
   ~Traduccion();
+  Traduccion(DTEjercicio* DTEj);
   Traduccion(string nombreEjericio, string descripcionEjercicio, string fraseATraducir, string fraseSolucion);
+
+  string getFraseATraducir();
+  string getFraseSolucion();
 };
 
 #endif /* TRADUCCION_H */

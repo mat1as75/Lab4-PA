@@ -15,6 +15,7 @@
 
 #include <string>
 #include <vector>
+#include "../ICollection/interfaces/ICollectible.h"
 #include "../ICollection/interfaces/IDictionary.h"
 #include "IControlador.h"
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
@@ -23,6 +24,8 @@
 #include "Date.h"
 #include "DTLeccion.h"
 #include "DTCurso.h"
+#include "../DataTypes/DTCompletarFrase.h"
+#include "../DataTypes/DTTraduccion.h"
 using namespace std;
 
 class Controlador: public IControlador {
@@ -37,13 +40,15 @@ protected:
     IDictionary* auxCursosPrev;//la coleccion de cursos previos para cuando quiero crear un curso
     Profesor* auxProfDeCurso;//auxiliar con el profesor del curso que quiero probar
 	Idioma* auxIdiomaDeCurso;//auxiliar con el idioma del curso por crear
-    Curso* auxCurso; // Puntero auxiliar al curso para la oper SelecionarCurso()
+    Curso* cursoSeleccionado; // Puntero auxiliar al curso para la oper SelecionarCurso(string nombreCurso)
     DTLeccion* auxDTLeccion; // Datatype Leccion auxiliar
     DTCurso* cursoACrear; //auxiliar con los datos del curso a crear   
     ICollection* auxDTEjercicios; // Coleccion Datatype Ejecicio auxiliar
     string nickname,contrasena,nombre,descripcion,paisRes,instituto; //auxiliares para alta usuario
     Date* fecNac;
     IDictionary* misIdiomasAuxiliares;// coleccion auxiliar de idiomas para crear profesor
+
+    IDictionary* DTEjerciciosAux; /* Coleccion auxiliar de DTEjercicios */
 public:
     static Controlador* getInstance(); // 3 de Singleton
     virtual ~Controlador();
@@ -54,10 +59,8 @@ public:
     IDictionary* getEstudiantes();
     IDictionary* getProfesores();
     IDictionary* getIdiomas();
+    IDictionary* getIdiomasAuxiliares();
 
-    
-    //Usuario* ingresarEstudiante(string nicknameEstudiante, string passEstudiante, string nombreEstudiante, string descEstudiante, string paisResEstudiante, Date* fecNacEstudiante) override;
-    //Usuario* ingresarProfesor(string nicknameProfesor, string passProfesor, string nombreProfesor, string descProfesor, string institutoProfesor) override;
     
     /* Recibe sets de Usuarios y hacer el alta 
         de dicho usuario en el sistema
@@ -77,10 +80,8 @@ public:
     vector<string> listarCursosNoHabilitados();
     void SeleccionarCurso(string nombreCurso);
     void IngresarDatosLeccion(string tema, string objAprendizaje);
-   // void AltaLeccion();
 
     /*Consulta Usuario*/
-
     vector <string> listarUsuarios();
     DTUsuario* mostrarInfoUsuario(string nickname);
     
@@ -92,6 +93,20 @@ public:
 	vector <string> listarCursosHabilitados();
 	void buscarCursoPrevio(string nombreCursoPrev);
 	bool AltaCurso();
+
+    /* Operaciones de Agregar Leccion */
+    vector<string> listarCursosNoHabilitados() override;
+    void SeleccionarCurso(string nombreCurso) override;
+    void IngresarDatosLeccion(string tema, string objAprendizaje) override;
+    void AltaLeccion() override;
+     
+    /* Operaciones de Agregar Ejercicio */
+    void IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) override;
+    void IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) override;
+    
+    /* Operaciones de Eliminar Curso */
+    vector<string> ListarCursos() override;
+    void EliminarCurso(string nombreCurso) override;
 };
 
 #endif /* CONTROLADOR_H */

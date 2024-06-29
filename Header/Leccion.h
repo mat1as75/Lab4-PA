@@ -16,9 +16,12 @@
 #include <string>
 #include <vector>
 #include "Ejercicio.h" /* Dependencia en Diagrama de Clases */
-#include "DTEjercicio.h"
-#include "../ICollection/interfaces/ICollectible.h"
-#include "../ICollection/interfaces/ICollection.h"
+#include "CompletarFrase.h"
+#include "Traduccion.h"
+#include "../ICo.h"
+#include "../DataTypes/DTEjercicio.h"
+#include "../DataTypes/DTCompletarFrase.h"
+#include "../DataTypes/DTTraduccion.h"
 using namespace std;
 
 class Leccion: public ICollectible {
@@ -30,8 +33,13 @@ public:
   Leccion();
   ~Leccion();
   Leccion(string tema, string objAprendizaje);
+  string getTema();
 
-  void AgregateEjercicio(DTEjercicio* DTEjer);
+  /* Operacione de AltaLeccion */
+  void AgregateEjercicio(DTEjercicio* ej);
+
+  /* Operacions de EliminarCurso */
+  void EliminarEjercicios();
 };
 
 #endif /* LECCION_H */

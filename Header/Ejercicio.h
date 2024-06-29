@@ -15,18 +15,21 @@
 
 #include <string>
 #include <vector>
+#include "../DataTypes/DTEjercicio.h"
 #include "../ICollection/interfaces/ICollectible.h"
 using namespace std;
 
 class Ejercicio: public ICollectible {
-private:
+protected:
   string nombreEjercicio;
   string descripcionEjercicio;
 public:
   Ejercicio();
   ~Ejercicio();
   Ejercicio(string nombreEjercicio, string descripcionEjercicio);
-  virtual string toString() = 0;
+
+  string getNombreEjercicio();
+  string getDescEjercicio();
 };
 
 #endif /* EJERCICIO_H */

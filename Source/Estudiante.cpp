@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
-#include "Estudiante.h"
+#include "../Header/Estudiante.h"
 
 Estudiante::Estudiante() {
 }
@@ -32,3 +32,19 @@ string Estudiante::toString() {
 	return "Estudiante: " + this->nickname + ", " + this->nombreUsuario  + ", " + this->paisRes + ", " + getFecnac();
 }
 
+void Estudiante::EliminarCurso(Curso* c, Inscripcion* i) {
+    
+    IIterator* iter = this->misInscripciones->getIterator();
+    while(iter->hasCurrent()) {
+        Inscripcion* i = (Inscripcion*) iter->getCurrent();
+        /* 4.2*.1.1 member(c) */
+        bool esMiembro = this->misInscripciones->member(i->getCurso());
+        
+        if(esMiembro) { /* [es Miembro] */
+            this->misInscripciones->remove(i->getCurso()); /* 4.2*.1.2remove(c) */
+            this->misInscripciones->remove(this); /* 4.2*1.3 remove(i) */
+        }
+        
+        iter->next();
+    }
+}

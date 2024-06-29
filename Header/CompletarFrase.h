@@ -23,8 +23,11 @@ private:
 public:
   CompletarFrase();
   ~CompletarFrase();
+  CompletarFrase(DTEjercicio* DTEj);
   CompletarFrase(string nombreEjericio, string descripcionEjercicio, string fraseIncompleta, vector<string> palabrasSolucion);
-  string toString() override;
+
+  string getFraseIncompleta();
+  vector<string> getPalabrasSolucion();
 };
 
 #endif /* COMPLETARFRASE_H */

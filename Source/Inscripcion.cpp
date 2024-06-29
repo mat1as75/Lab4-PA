@@ -10,8 +10,7 @@
  * Created on 15 de junio de 2024, 10:35 p. m.
  */
 
-#include "Header/Estudiante.h"
-#include "Header/Inscripcion.h"
+#include "../Header/Inscripcion.h"
 
 Inscripcion::Inscripcion() {
 }
@@ -22,3 +21,11 @@ Inscripcion::Inscripcion(const Inscripcion& orig) {
 Inscripcion::~Inscripcion() {
 }
 
+ICollectible* Inscripcion::getCurso() {
+    return(ICollectible*) this->miCurso;
+}
+
+void Inscripcion::EliminarCurso(Curso* c) {
+    /* 4.2*.1 eliminarCurso */
+    this->miEstudiante->EliminarCurso(c, this);
+}

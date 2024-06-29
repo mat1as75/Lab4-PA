@@ -17,7 +17,7 @@ Profesor::Profesor(string nickname, string password, string nombreUsuario, strin
 	this->nombreUsuario = nombreUsuario;
 	this->descripcionUsuario = descripcionUsuario;
 	this->instituto = instituto;
-	this->idiomasEspecializado=new OrderedDictionary();
+	this->idiomasEspecializado = new OrderedDictionary();
 }
 
 string Profesor::getInstituto() {
@@ -27,10 +27,16 @@ string Profesor::getInstituto() {
 string Profesor::toString() {
 	return "Profesor: " + this->nickname + ", " + this->nombreUsuario  + ", " + this->instituto;
 }
+
+void Profesor::EliminarCurso(Curso* c) {
+    /* remove(c) */
+    this->misCursos->remove((ICollectible*) c);
+}
+
 IDictionary* Profesor::getIdiomasEspecializado(){
-	
 	return this->idiomasEspecializado;
 }
+
 DTUsuario* Profesor::getInfo(){
 	DTUsuario* dataP= new DTProfesor(this->getNombreU(),this->getDescripcionU(),this->getInstituto(),this->getIdiomasEspecializado());
 	return dataP;

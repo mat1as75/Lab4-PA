@@ -22,7 +22,8 @@ using namespace std;
 class Profesor: public Usuario {
 protected:
 	string instituto;
-	vector <Idioma*> idiomasEspecializado; /* Lista de idiomas en los que se especializa el profesor */
+	IDictionary* idiomasEspecializado; /* Lista de idiomas en los que se especializa el profesor */
+	ICollection* misCursos;
 public:
 	Profesor();
 	~Profesor();
@@ -35,6 +36,10 @@ public:
 	DTUsuario* getInfo() ;
 
 	//Curso* proponerCurso(string nombreCurso, string descripcionCurso, Dificultad dificultad /* Agregar lista de Cursos Previos */);
+
+	/* Opearaciones de EliminarCurso */
+	void EliminarCurso(Curso* c);
+    
 };
 
 #endif /* PROFESOR_H */

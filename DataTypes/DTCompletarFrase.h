@@ -18,14 +18,17 @@
 #include <vector>
 using namespace std;
 
-class DTCompletarFrase: public DTEjercicio{
-protected:
+class DTCompletarFrase: public DTEjercicio {
+private:
     string fraseIncompleta;
-    vector<string*> palabrasSolucion;
+    vector<string> palabrasSolucion;
 public:
     DTCompletarFrase();
-    DTCompletarFrase(string nombreEjercicio, string descEjercicio, string fraseIncompleta, vector<string> palabrasSolucion);
+    DTCompletarFrase(string tipoEjercicio, string nombre, string descripcion, string fraseIncompleta, vector<string> palabrasSolucion);
     virtual ~DTCompletarFrase();
+
+    string getFraseIncompleta();
+    vector<string> getPalabrasSolucion();
 };
 
 #endif /* DTCOMPLETARFRASE_H */

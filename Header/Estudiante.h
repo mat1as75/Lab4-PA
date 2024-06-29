@@ -16,7 +16,7 @@
 
 #include "Usuario.h"
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
-//#include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
+#include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
 #include "../ICo.h"
 using namespace std;
@@ -33,6 +33,9 @@ public:
 	string getPaisRes();
 	string getFecnac();
 	string toString() override;
+
+	/* Operaciones de EliminarCurso */
+	void EliminarCurso(Curso* c, Inscripcion* i);
 };
 
 #endif /* ESTUDIANTE_H */
