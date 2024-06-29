@@ -128,7 +128,7 @@ void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string des
 	IKey* key=new String(profe);
 	
 	
-	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->misProfesores->find(key));
+	this->auxProfDeCurso = dynamic_cast<Profesor*>(this->Profesores->find(key));
 	
 	this->cursoACrear= new DTCurso(nombre, descripcion, dif);
 }
@@ -136,7 +136,7 @@ void Controlador::ingresarDatosCurso(string nicknameP, string nombre, string des
 void Controlador::buscarIdioma(string nombreIdioma){
 	const char* idioma=nombreIdioma.c_str();
 	IKey* key=new String(idioma);
-	this->auxIdiomaDeCurso = dynamic_cast<Idioma*>(this->misIdiomas->find(key));
+	this->auxIdiomaDeCurso = dynamic_cast<Idioma*>(this->Idiomas->find(key));
 }
 
 vector <string> Controlador::listarCursosHabilitados(){
