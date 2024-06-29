@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
+
 #include "../Header/Estudiante.h"
+#include "DataTypes/DTProgresoCurso.h"
+
 
 Estudiante::Estudiante() {
 }
@@ -32,6 +35,7 @@ string Estudiante::toString() {
 	return "Estudiante: " + this->nickname + ", " + this->nombreUsuario  + ", " + this->paisRes + ", " + getFecnac();
 }
 
+
 void Estudiante::EliminarCurso(Curso* c, Inscripcion* i) {
     
     IIterator* iter = this->misInscripciones->getIterator();
@@ -48,3 +52,17 @@ void Estudiante::EliminarCurso(Curso* c, Inscripcion* i) {
         iter->next();
     }
 }
+
+vector<DTProgresoCurso*> Estudiante::obtenerProgreso(){
+	vector<DTProgresoCurso*> DTProgresos;
+	IIterator* it= this->misInscripciones->getIterator(); 
+	while(it->hasCurrent()){ 
+		DTProgresoCurso* DTProg;
+		Inscripcion* aux=(Inscripcion*)it->getCurrent(); 
+		DTProg = aux->getProgresoCurso();
+		DTProgresos.push_back(DTProg);
+		it->next();
+	}
+	return DTProgresos;
+}
+

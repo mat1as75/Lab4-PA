@@ -26,6 +26,9 @@
 #include "DTCurso.h"
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"
+#include "../DataTypes/DTProgresoCurso.h"
+
+
 using namespace std;
 
 class Controlador: public IControlador {
@@ -107,6 +110,12 @@ public:
     /* Operaciones de Eliminar Curso */
     vector<string> ListarCursos() override;
     void EliminarCurso(string nombreCurso) override;
+
+    /*Consultar Estadisticas*/
+    vector <string> listarEstudiantes();
+	vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname);
+	vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname);
+	DTProgresoCurso* MostrarProgresoCurso(string nombreCurso);
 };
 
 #endif /* CONTROLADOR_H */

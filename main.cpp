@@ -27,6 +27,7 @@
 #include "Header/Curso.h"
 #include "ICollection/String.h"
 #include "DataTypes/DTUsuario.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 int main () {
@@ -56,7 +57,7 @@ int main () {
 	
 	do{
 		cout<<"       MENU    "<<endl;
-		cout<<" 1.Alta Usuario \n 2.Consultar Usuario \n 3.Alta Idioma \n 4.Consultar Idiomas \n 5.Alta Curso "<<endl;
+		cout<<" 1.Alta Usuario \n 2.Consultar Usuario \n 3.Alta Idioma \n 4.Consultar Idiomas \n 5.Alta Curso \n 6.Consultar Estadisticas \n7.Salir "<<endl;
 		
 		cin>>opcion;
 		
@@ -451,35 +452,154 @@ int main () {
 			}else{
 				cout<<"¡Este curso ya existe en el sistema!"<<endl;
 			}
-			
-			
-
-
-
-
-
 			break;
 			};
+			case 6: {
+			cout<<"Seleccione uno por favor...  \n 1.Estadisticas de Estudiantes \n 2.Estadisticas de Profesores \n 3.Estadisticas de cursos \n 4.Salir: "<<endl;
+			cin>>opcion;
+			fflush(stdin);
+			cout<<endl;
+			if(opcion == 4){
+				break;
+			}
+			while(opcion != 1 && opcion != 2 && opcion != 3){
+				if(opcion == 4){
+					break;
+				}
+				cout<<"Seleccione una opcion correcta por favor...  \n 1.Estadisticas de Estudiantes \n 2.Estadisticas de Profesores \n 3.Estadisticas de cursos \n 4.Salir: "<<endl;
+				cin>>opcion;
+				fflush(stdin);
+				cout<<endl;
+			}
+			switch(opcion){
+			case 1:{
+				if(con->getEstudiantes()->getSize() == 0) {
+					cout << "error: No hay estudiantes en el Sistema" << endl;
+					break;
+				}else{
+				string user;
+				vector<string> estudiantes=con->listarEstudiantes();
+				for (int i=0; i<(int)estudiantes.size(); i++){
+					cout<<"Nombre del Estudiante " << i+1 << ":" <<estudiantes[i]<<endl;
+				}
+				cout<<"Seleccione un estudiante : "<<endl;
+				getline(cin,user);
+				
+				const char* userChar=user.c_str();
+				IKey* key= new String(userChar);
+				
+				if(con->getEstudiantes()->member(key)==false){
+					cout<<endl;
+					while(con->getEstudiantes()->member(key)==false){
+						cout<<"El estudiante ingresado no existe, ingrese uno valido: "<<endl;
+						cout<<endl;
+						cout<<"Estudiantes disponibles :"<<endl;
+						cout<<endl;
+						for (int i=0; i<(int)estudiantes.size(); i++){
+							cout<<"Nombre del Estudiante " << i+1 << ":" <<estudiantes[i]<<endl;
+						}
+						cout<<endl;
+						cout<<"> ";
+						getline(cin,user);
+						userChar=user.c_str();
+						key= new String(userChar);
+					}
+				}
+				cout<<endl;
+				vector<DATA_PROGRESO_CURSO*> Stats =  con->ListarEstadisticasEstudiante(user);
+				for( int i=0; i<(int)Stats.size(); i++){
+					cout<<Stats[i]<<endl;
+				}
+				cout<<endl<<endl;
+				break;
+			}
+			}
+			case 2: {
+					if(con->getProfesores()->getSize() == 0) {
+						cout << "error: No hay profesores en el Sistema" << endl;
+						break;
+					}else{
+					string user;
+					vector<string> profesores=con->listarProfesores();
+					for (int i=0; i<(int)profesores.size(); i++){
+						cout<<"Nombre del Profesor" << i+1 << ":" <<profesores[i]<<endl;
+					}
+					cout<<"Seleccione un profesor : "<<endl;
+					getline(cin,user);
+					
+					const char* userChar=user.c_str();
+					IKey* key= new String(userChar);
+					
+					if(con->getProfesores()->member(key)==false){
+						cout<<endl;
+						while(con->getProfesores()->member(key)==false){
+							cout<<"El profesor ingresado no existe, ingrese uno valido: "<<endl;
+							cout<<endl;
+							cout<<"Profesores disponibles :"<<endl;
+							cout<<endl;
+							for (int i=0; i<(int)profesores.size(); i++){
+								cout<<"Nombre del Profesores " << i+1 << ":" <<profesores[i]<<endl;
+							}
+							cout<<endl;
+							cout<<"> ";
+							getline(cin,user);
+							userChar=user.c_str();
+							key= new String(userChar);
+						}
+					}
+					cout<<endl;
+					vector<DATA_PROGRESO_CURSO*> Stats =  con->ListarCursosPropuestosPor(user);
+					for( int i=0; i<(int)Stats.size(); i++){
+						cout<<Stats[i]<<endl;
+					}
+					cout<<endl<<endl;
+					break;
+				}
+			}
+			case 3:{
+				if(con->getCursosHabilitados()->getSize() == 0) {
+					cout << "error: No hay cursos en el Sistema" << endl;
+					break;
+				}else{
+				string user;
+				vector<string> cursosHab=con->listarCursosHabilitados();
+				for (int i=0; i<(int)cursosHab.size(); i++){
+					cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
+				}
+				cout<<"Seleccione un Curso: "<<endl;
+				getline(cin,user);
+				
+				const char* userChar=user.c_str();
+				IKey* key= new String(userChar);
+				
+				if(con->getCursosHabilitados()->member(key)==false){
+					cout<<endl;
+					while(con->getCursosHabilitados()->member(key)==false){
+						cout<<"El curso ingresado no existe, ingrese uno valido: "<<endl;
+						cout<<endl;
+						cout<<"Cursos disponibles :"<<endl;
+						cout<<endl;
+						for (int i=0; i<(int)cursosHab.size(); i++){
+							cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
+						}
+						cout<<endl;
+						cout<<"> ";
+						getline(cin,user);
+						userChar=user.c_str();
+						key= new String(userChar);
+					}
+				}
+				cout<<endl;
+				DATA_PROGRESO_CURSO* Stats =  con->MostrarProgresoCurso(user);
+				cout << Stats <<endl;
+				cout<<endl<<endl;
+				break;
+			}
+		}
+	}
+}
 		};
-	} while(opcion!=6);
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	} while(opcion!=7);
     return 0;
 };
 

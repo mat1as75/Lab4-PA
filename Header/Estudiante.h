@@ -19,6 +19,8 @@
 #include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
 #include "../ICo.h"
+#include "Inscripcion.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 class Estudiante: public Usuario{
@@ -36,6 +38,9 @@ public:
 
 	/* Operaciones de EliminarCurso */
 	void EliminarCurso(Curso* c, Inscripcion* i);
+
+	vector<DTProgresoCurso*> obtenerProgreso();
+
 };
 
 #endif /* ESTUDIANTE_H */

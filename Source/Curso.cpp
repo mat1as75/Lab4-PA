@@ -119,6 +119,7 @@ void Curso::agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev){
 	this->cursosPrevios->add(nombreCPrev ,cPrev);
 
 }
+
 void Curso::agregateIdioma(Idioma* idiomaDeCurso){
 	this->idiomaCurso = idiomaDeCurso;
 }
@@ -126,4 +127,18 @@ void Curso::agregateIdioma(Idioma* idiomaDeCurso){
 void Curso::agregateProfesor(Profesor* profDeCurso){
 	this->profeCurso = profDeCurso;
 	
+}
+
+DTProgresoCurso* Curso::obtenerEstadisticasCursos(){
+    float Progreso = 0;
+    IIterator* it= this->misInscripciones->getIterator(); 
+    while(it->hasCurrent()){ 
+        Inscripcion* aux=(Inscripcion*)it->getCurrent(); 
+        Progreso = Progreso + (aux->obtenerProgreso());
+        it->next();
+    }
+    Progreso = Progreso / (this->misInscripciones->getSize());
+    DTProgresoCurso* Prog = new DTProgresoCurso(this->nombreCurso,Progreso);
+
+    return Prog;
 }

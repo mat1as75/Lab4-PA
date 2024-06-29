@@ -17,6 +17,7 @@
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
 #include "DTUsuario.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 class Profesor: public Usuario {
@@ -33,7 +34,8 @@ public:
 	IDictionary* getIdiomasEspecializado();
 	void setIdiomasEspecializado(IKey* key, ICollectible* collect);
 	void setIdiomasEspecializado(IDictionary* idiomas);
-	DTUsuario* getInfo() ;
+	DTUsuario* getInfo();
+	vector<DTProgresoCurso*> obtenerEstadisticasCursos();
 
 	//Curso* proponerCurso(string nombreCurso, string descripcionCurso, Dificultad dificultad /* Agregar lista de Cursos Previos */);
 

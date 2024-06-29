@@ -16,7 +16,9 @@
 #include <string>
 #include <vector>
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
+#include "Profesor.h"
 class Profesor;
+#include "Inscripcion.h"
 class Inscripcion;
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
 #include "DTLeccion.h"
@@ -64,6 +66,8 @@ public:
     void EliminarProfesor();
     void EliminarInscripciones();
     void EliminarCursoPrevio(Curso* c);
+
+	DTProgresoCurso* obtenerEstadisticasCursos();
 
 };
 

@@ -11,6 +11,8 @@
  */
 
 #include "../Header/Inscripcion.h"
+#include "../Header/Estudiante.h"
+#include "DataTypes/DTProgresoCurso.h"
 
 Inscripcion::Inscripcion() {
 }
@@ -29,3 +31,19 @@ void Inscripcion::EliminarCurso(Curso* c) {
     /* 4.2*.1 eliminarCurso */
     this->miEstudiante->EliminarCurso(c, this);
 }
+
+string Inscripcion :: getNombreCurso() {
+	return this->miCurso->getNombreCurso();
+}
+
+DTProgresoCurso* Inscripcion::getProgresoCurso(){
+	string nombreCurso = this->getNombreCurso();
+	DTProgresoCurso* DTProgreso = new DTProgresoCurso(nombreCurso,progresoCurso);
+	return DTProgreso;
+}
+
+float Inscripcion:: obtenerProgreso(){
+	return this->progresoCurso;
+}
+
+
