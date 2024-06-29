@@ -10,6 +10,7 @@
 #include "Header/Curso.h"
 #include "DTCurso.h"
 #include "DataTypes/DTProgresoCurso.h"
+#include "../ICo.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;
@@ -204,14 +205,11 @@ vector <string> Controlador::listarCursosHabilitados(){
 }
 
 void Controlador::buscarCursoPrevio(string nombreCursoPrev){
-	const char* cursoP=nombreCursoPrev.c_str();
-	IKey* key=new String(cursoP);
-	
+	const char* cursoP = nombreCursoPrev.c_str();
+	OrderedKey* key = new String(cursoP);
 	
 	ICollectible* auxCursoPrevio = this->CursosHabilitados->find(key);
 	this->auxCursosPrev->add(key,auxCursoPrevio);
-	
-	
 }
 
 bool Controlador::AltaCurso(){
@@ -353,7 +351,7 @@ bool Controlador::altaUsuario(){
 			}
 
 			
-			this->Profesores->add(ik,(ICollectible*)profesor);
+			this->Profesores->add(ik,(ICollectible*) profesor);
 			
 			this->instituto="";
 			retorno= true;
@@ -378,7 +376,7 @@ bool Controlador::altaUsuario(){
 /*Consultar Estadisticas*/
 vector <string> Controlador::listarEstudiantes(){
 	vector<string> misEstudiantes;
-	IIterator* it= this->misEstudiantes->getIterator(); 
+	IIterator* it= this->Estudiantes->getIterator(); 
 	while(it->hasCurrent()){ 
 		Estudiante* aux=(Estudiante*)it->getCurrent(); //
 		misEstudiantes.push_back(aux->getNickname());
@@ -392,7 +390,7 @@ vector <DTProgresoCurso*> Controlador::ListarEstadisticasEstudiante(string nickn
 	const char* nick=nickname.c_str();
 	IKey* key = new String(nick);
 	
-	ICollectible* ICestudiante = this->misEstudiantes->find(key);
+	ICollectible* ICestudiante = this->Estudiantes->find(key);
 
 		Estudiante* estudiante=(Estudiante*) ICestudiante;
 		vector <DTProgresoCurso*> DTProgresos = estudiante->obtenerProgreso();
@@ -403,7 +401,7 @@ vector <DTProgresoCurso*> Controlador::ListarCursosPropuestosPor(string nickname
 	const char* nick=nickname.c_str();
 	IKey* key = new String(nick);
 	
-	ICollectible* ICprofesor= this->misProfesores->find(key);
+	ICollectible* ICprofesor= this->Profesores->find(key);
 	
 	Profesor* profesor=(Profesor*) ICprofesor;
 	vector <DTProgresoCurso*> DTProgresos = profesor->obtenerEstadisticasCursos();

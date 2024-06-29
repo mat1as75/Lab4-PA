@@ -7,11 +7,12 @@ DTProfesor::DTProfesor() {
 
 
 
-DTProfesor::DTProfesor(string nombre, string descripcion,string instituto, IDictionary* idiomasEspecializado): DATAUSUARIO(nombre,descripcion){
+DTProfesor::DTProfesor(string nombre, string descripcion,string instituto, IDictionary* idiomasEspecializado): DTUsuario(nombre,descripcion){
 	this->idiomasEspecializado=new OrderedDictionary();
 	this->instituto=instituto;
 	this->idiomasEspecializado=idiomasEspecializado;
 }
+
 DTProfesor::~DTProfesor() {
 	
 }
