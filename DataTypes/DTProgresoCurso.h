@@ -3,11 +3,11 @@
 #include <string>
 using namespace std;
 
-class DATA_PROGRESO_CURSO {
+class DTProgresoCurso {
 public:
-	DATA_PROGRESO_CURSO(string nombreCurso, float progresoCurso);
-	DATA_PROGRESO_CURSO();
-	~DATA_PROGRESO_CURSO();
+	DTProgresoCurso(string nombreCurso, float progresoCurso);
+	DTProgresoCurso();
+	~DTProgresoCurso();
 private:	
 	string nombreCurso;
 	float progresoCurso;

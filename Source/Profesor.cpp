@@ -4,7 +4,8 @@
  */
 
 #include "Profesor.h"
-#include "DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTProfesor.h"
 
 Profesor::Profesor(){
 }
@@ -45,7 +46,7 @@ DTUsuario* Profesor::getInfo(){
 void Profesor::setIdiomasEspecializado(IKey* key, ICollectible* collect){
 	
 	this->idiomasEspecializado->add(key,collect);
-	cout<<"ldssd"<<endl;
+	
 }
 void Profesor::setIdiomasEspecializado(IDictionary* idiomas){
 	this->idiomasEspecializado=idiomas;
