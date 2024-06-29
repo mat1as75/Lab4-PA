@@ -4,6 +4,7 @@
  */
 
 #include "Estudiante.h"
+#include "DataTypes/DTProgresoCurso.h"
 
 Estudiante::Estudiante() {
 }
@@ -32,3 +33,15 @@ string Estudiante::toString() {
 	return "Estudiante: " + this->nickname + ", " + this->nombreUsuario  + ", " + this->paisRes + ", " + getFecnac();
 }
 
+vector<DTProgresoCurso*> Estudiante::obtenerProgreso(){
+	vector<DTProgresoCurso*> DTProgresos;
+	IIterator* it= this->misInscripciones->getIterator(); 
+	while(it->hasCurrent()){ 
+		DTProgresoCurso* DTProg;
+		Inscripcion* aux=(Inscripcion*)it->getCurrent(); 
+		DTProg = aux->getProgresoCurso();
+		DTProgresos.push_back(DTProg);
+		it->next();
+	}
+	return DTProgresos;
+}

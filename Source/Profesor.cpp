@@ -4,6 +4,7 @@
  */
 
 #include "Profesor.h"
+#include "DataTypes/DTProgresoCurso.h"
 
 Profesor::Profesor(){
 }
@@ -42,4 +43,17 @@ void Profesor::setIdiomasEspecializado(IKey* key, ICollectible* collect){
 }
 void Profesor::setIdiomasEspecializado(IDictionary* idiomas){
 	this->idiomasEspecializado=idiomas;
+}
+
+vector<DTProgresoCurso*> Profesor::obtenerEstadisticasCursos(){
+	vector<DTProgresoCurso*> DTProgresos;
+	IIterator* it= this->misCursos->getIterator(); 
+	while(it->hasCurrent()){ 
+		DTProgresoCurso* DTProg;
+		Curso* aux=(Curso*)it->getCurrent(); 
+		DTProg = aux->obtenerEstadisticasCursos();
+		DTProgresos.push_back(DTProg);
+		it->next();
+	}
+	return DTProgresos;
 }

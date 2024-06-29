@@ -45,6 +45,10 @@ public:
 	virtual bool AltaCurso()=0;
     virtual vector <string> listarUsuarios()=0;
     virtual DTUsuario* mostrarInfoUsuario(string nickname)=0;
+    virtual vector <string> listarEstudiantes()=0;
+	virtual vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname)=0;
+	virtual vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname)=0;
+	virtual DTProgresoCurso* MostrarProgresoCurso(string nombreCurso)=0;
 };
 
 #endif /* ICONTROLADOR_H */

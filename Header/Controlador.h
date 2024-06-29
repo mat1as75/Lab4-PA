@@ -21,8 +21,9 @@
 #include "Usuario.h" /* Dependencia en Diagrama de Clases */
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
-#include "DTLeccion.h"
-#include "DTCurso.h"
+#include "DataTypes/DTLeccion.h"
+#include "DataTypes/DTCurso.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 class Controlador: public IControlador {
@@ -92,6 +93,12 @@ public:
 	vector <string> listarCursosHabilitados();
 	void buscarCursoPrevio(string nombreCursoPrev);
 	bool AltaCurso();
+
+    /*Consultar Estadisticas*/
+    vector <string> listarEstudiantes();
+	vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname);
+	vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname);
+	DTProgresoCurso* MostrarProgresoCurso(string nombreCurso);
 };
 
 #endif /* CONTROLADOR_H */

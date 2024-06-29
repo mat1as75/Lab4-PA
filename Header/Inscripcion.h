@@ -19,6 +19,7 @@
 #include "../Estudiante.h"
 #include "../Curso.h"
 #include "../ICollection/interfaces/ICollectible.h"
+#include "DataTypes/DTProgresoCurso.h"
 
 class Inscripcion: public ICollectible{
 private:
@@ -27,9 +28,12 @@ private:
     Estudiante* miEstudiante;
     Curso* miCurso;
 public:
+    string getNombreCurso();
     Inscripcion();
     Inscripcion(const Inscripcion& orig);
     virtual ~Inscripcion();
+    DTProgresoCurso* getProgresoCurso();
+	float obtenerProgreso();
 };
 
 #endif /* INSCRIPCION_H */

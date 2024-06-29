@@ -10,6 +10,7 @@
 #include "Header/Usuario.h"
 #include "Header/Curso.h"
 #include "DTCurso.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;
@@ -322,8 +323,53 @@ bool Controlador::altaUsuario(){
 	return retorno;
 }
 
+/*Consultar Estadisticas*/
+vector <string> Controlador::listarEstudiantes(){
+	vector<string> misEstudiantes;
+	IIterator* it= this->misEstudiantes->getIterator(); 
+	while(it->hasCurrent()){ 
+		Estudiante* aux=(Estudiante*)it->getCurrent(); //
+		misEstudiantes.push_back(aux->getNickname());
+		it->next();
+	}
+	
+	return misEstudiantes;
+}
 
+vector <DTProgresoCurso*> Controlador::ListarEstadisticasEstudiante(string nickname){
+	const char* nick=nickname.c_str();
+	IKey* key = new String(nick);
+	
+	ICollectible* ICestudiante = this->misEstudiantes->find(key);
 
+		Estudiante* estudiante=(Estudiante*) ICestudiante;
+		vector <DTProgresoCurso*> DTProgresos = estudiante->obtenerProgreso();
+		return DTProgresos;
+}
+
+vector <DTProgresoCurso*> Controlador::ListarCursosPropuestosPor(string nickname){
+	const char* nick=nickname.c_str();
+	IKey* key = new String(nick);
+	
+	ICollectible* ICprofesor= this->misProfesores->find(key);
+	
+	Profesor* profesor=(Profesor*) ICprofesor;
+	vector <DTProgresoCurso*> DTProgresos = profesor->obtenerEstadisticasCursos();
+	
+	return DTProgresos;
+}
+	
+DTProgresoCurso* Controlador::MostrarProgresoCurso(string nombreCurso){
+	const char* cur=nombreCurso.c_str();
+	IKey* key = new String(cur);
+	
+	ICollectible* ICcurso= this->CursosHabilitados->find(key);
+	Curso* curso=(Curso*) ICcurso;
+	
+	DTProgresoCurso* DTProgresos = curso->obtenerEstadisticasCursos();
+	
+	return DTProgresos;
+}
 
 
 

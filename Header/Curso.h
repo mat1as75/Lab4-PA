@@ -24,6 +24,7 @@
 #include "ICollection/interfaces/ICollectible.h"
 #include "ICollection/interfaces/IDictionary.h"
 #include "Profesor.h"
+#include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
 enum Dificultad {
@@ -52,6 +53,7 @@ public:
 	void agregateProfesor(Profesor* profDeCurso);
 	void agregateIdioma(Idioma* idiomaDeCurso);
 	void agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev);
+	DTProgresoCurso* obtenerEstadisticasCursos();
 	/* Hacer Oper para obtener Cursos Previos */
 };
 

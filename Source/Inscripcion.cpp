@@ -12,6 +12,7 @@
 
 #include "Header/Estudiante.h"
 #include "Header/Inscripcion.h"
+#include "DataTypes/DTProgresoCurso.h"
 
 Inscripcion::Inscripcion() {
 }
@@ -20,5 +21,19 @@ Inscripcion::Inscripcion(const Inscripcion& orig) {
 }
 
 Inscripcion::~Inscripcion() {
+}
+
+string Inscripcion :: getNombreCurso() {
+	return this->miCurso->getNombreCurso();
+}
+
+DTProgresoCurso* Inscripcion::getProgresoCurso(){
+	string nombreCurso = this->getNombreCurso();
+	DTProgresoCurso* DTProgreso = new DTProgresoCurso(nombreCurso,progresoCurso);
+	return DTProgreso;
+}
+
+float Inscripcion:: obtenerProgreso(){
+	return this->progresoCurso;
 }
 
