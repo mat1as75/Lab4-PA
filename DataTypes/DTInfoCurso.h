@@ -14,7 +14,17 @@ enum Dificultad {
 class DTInfoCurso {
 public:
 	DTInfoCurso();
+	DTInfoCurso(string nombreCurso,string descrpicionCurso,Dificultad dificultad,string idiomaCurso,string nombreProfesor,vector<DTLeccion*>listaLecciones,vector<DTInscripcion*> listaInscripciones);
 	~DTInfoCurso();
+	vector<DTLeccion*> getDTLecciones();
+	vector<DTInscripcion*> getDTInscripciones();
+	string getNombreCurso();
+	string getDescripcion();
+	string getDificultad();
+	string getNombreIdioma();
+	string getNombreProfesor();
+	string getHabilitado();
+	
 private:
 	
 string nombreCurso;
@@ -23,8 +33,8 @@ Dificultad dificultad;
 string nombreIdioma;
 string nombreProfesor;
 bool habilitado;
-vector<DTLeccion> lecciones;
-vector<DTInscripcion> inscripciones;
+vector<DTLeccion*> lecciones;
+vector<DTInscripcion*> inscripciones;
 
 };
 

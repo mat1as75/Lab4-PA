@@ -19,6 +19,7 @@
 #include "Usuario.h"
 #include "Profesor.h"
 #include "Date.h"
+#include "../ICo.h"
 using namespace std;
 
 class IControlador {
@@ -58,13 +59,11 @@ public:
     virtual vector<string> listarCursosNoHabilitados() = 0;
     virtual void SeleccionarCurso(string nombreCurso) = 0;
     virtual void IngresarDatosLeccion(string tema, string objAprendizaje) = 0;
-    virtual void IngresarLeccion(string tema, string objAprendizaje) = 0;
-    virtual void agregateLeccion(DTLeccion* DTLec) = 0;
     virtual void AltaLeccion() = 0;
     
     /* Operaciones de Agregar Ejercicio */
-}   virtual void seleccionarLeccion(string leccion)=0;
-    virtual vector<string> listarLecciones(string nomCurso)=0;
+    virtual void seleccionarLeccion(string leccion) = 0;
+    virtual vector<string> listarLecciones(string nomCurso) = 0;
     virtual void IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) = 0;
     virtual void IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) = 0;
 
@@ -74,14 +73,14 @@ public:
 
 
     /*Operaciones de Consultar estadisticas*/
-    virtual vector <string> listarEstudiantes()=0;
-	virtual vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname)=0;
-	virtual vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname)=0;
-	virtual DTProgresoCurso* MostrarProgresoCurso(string nombreCurso)=0;
+    virtual vector <string> listarEstudiantes() = 0;
+	virtual vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname) = 0;
+	virtual vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname) = 0;
+	virtual DTProgresoCurso* MostrarProgresoCurso(string nombreCurso) = 0;
 
 
     /*Operaciones de consultar curso*/
-    virtual  vector <string> listarCursos()=0;
+    virtual  vector <string> listarCursos() = 0;
 
 
     /*Operaciones de Habilitar curso*/

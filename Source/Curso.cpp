@@ -233,3 +233,27 @@ Leccion* Curso::buscarLeccion(string leccion){
 	return l;
 }
 
+
+DTInfoCurso* Curso::getInfo(){
+	IIterator* it=this->misLecciones->getIterator();
+	vector<DTLeccion*> listaLecciones;
+	while(it->hasCurrent()){
+		Leccion* leccion = (Leccion*) it->getCurrent();
+		DTLeccion* dtLec=leccion->getInfo();
+		listaLecciones.push_back(dtLec);
+		it->next();
+	}
+	
+	it=this->misInscripciones->getIterator();
+	vector<DTInscripcion*> listaInscripciones;
+	while(it->hasCurrent()){
+		Inscripcion* inscripcion= (Inscripcion*) it->getCurrent();
+		DTInscripcion* dtInsc=inscripcion->getInfo();
+		listaInscripciones.push_back(dtInsc);
+		it->next();
+	}
+	
+	DTInfoCurso* dtInfo=new DTInfoCurso(this->nombreCurso,this->descrpicionCurso,this->dificultad,this->idiomaCurso->getNombreIdioma(),this->profeCurso->getNombreU(),listaLecciones,listaInscripciones);
+	//DTInfoCurso* dtInfo= new DTInfoCurso(this->nombreCurso,this->descripcionCurso,this->dificultad,this->idiomaCurso,
+	
+	return dtInfo;
