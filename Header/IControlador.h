@@ -21,7 +21,7 @@
 #include "Date.h"
 using namespace std;
 
-class IControlador: ICollectible {
+class IControlador {
 private:
     
     
