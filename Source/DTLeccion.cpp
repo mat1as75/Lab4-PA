@@ -20,3 +20,7 @@ void DTLeccion::setObjAprendizaje(string objAprendizaje){
 string DTLeccion::getObjAprendizaje(){
 	return this->objAprendizaje;
 }
+
+vector<DTEjercicio*> DTLeccion::getDTEjercicios() {
+    return this->misEjercicios;
+}

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
-#include "Idioma.h"
+#include "../Header/Idioma.h"
 
 Idioma::Idioma() {
 }

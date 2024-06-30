@@ -4,7 +4,7 @@
 #include <vector>
 #include "../DataTypes/DTRealizaEjercicio.h"
 #include "../Header/Inscripcion.h"
-#include "String.h"
+#include "../ICollection/String.h"
 
 
 Leccion::Leccion() {

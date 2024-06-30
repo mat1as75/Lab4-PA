@@ -32,7 +32,7 @@ public:
     string getTema();
     void setObjAprendizaje(string objAprendizaje);
     string getObjAprendizaje();
-    vector<DTEjercicio*> getMisEjercicios();
+    vector<DTEjercicio*> getDTEjercicios();
 };
 
 #endif /* DTLECCION_H */

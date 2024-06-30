@@ -13,7 +13,7 @@
 #ifndef TRADUCCION_H
 #define TRADUCCION_H
 
-#include <Ejercicio.h>
+#include "Ejercicio.h"
 using namespace std;
 
 class Traduccion: public Ejercicio {

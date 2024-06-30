@@ -12,9 +12,9 @@
 
 #include "../Header/Inscripcion.h"
 #include "../Header/Estudiante.h"
-#include "DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTProgresoCurso.h"
 #include "../DataTypes/DTRealizaEjercicio.h"
-#include "String.h"
+#include "../ICollection/String.h"
 
 Inscripcion::Inscripcion() {
 }

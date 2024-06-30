@@ -5,9 +5,9 @@
 
 
 #include "../Header/Estudiante.h"
-#include "DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTProgresoCurso.h"
 #include "../DataTypes/DTEstudiante.h"
-#include "String.h"
+#include "../ICollection/String.h"
 #include <ctime>
 #include "../Header/Inscripcion.h"
 class Inscripcion;

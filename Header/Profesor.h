@@ -16,8 +16,8 @@
 #include "Usuario.h" /* Dependencia en Diagrama de Clases */
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
-#include "DTUsuario.h"
-#include "DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTUsuario.h"
+#include "../DataTypes/DTProgresoCurso.h"
 #include "../ICollection/interfaces/IDictionary.h"
 
 using namespace std;

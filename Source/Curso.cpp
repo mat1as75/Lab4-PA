@@ -4,9 +4,8 @@
  */
 
 #include "../Header/Curso.h"
-//#include "../ICollection/interfaces/ICollectible.h"
+#include "../ICollection/interfaces/ICollectible.h"
 #include "../DataTypes/DTLeccion.h"
-#include <vector>
 
 Curso::Curso() {
 }
@@ -17,7 +16,7 @@ Curso::~Curso() {
 Curso::Curso(string nombreCurso, string descrpicionCurso, Dificultad dificultad) {
 	this->nombreCurso = nombreCurso;
 	this->descrpicionCurso = descrpicionCurso;
-	this->dificultad = dificultad;
+    this->dificultad = (Dificultad)dificultad;
 }
 
 string Curso::getNombreCurso() {
@@ -63,8 +62,8 @@ void Curso::AgregateLeccion(DTLeccion* DTLec) {
     /* [for all DATAEJERCICIO in set<DATAEJERCICIO>] */
     /* 9*.3 agregateEjercicio(DATAEJERCICIO) */
     
-    for(int i = 0; i < (int)DTLec->getMisEjercicios().size(); i++) {
-        l->AgregateEjercicio(DTLec->getMisEjercicios()[i]);
+    for(int i = 0; i < (int)DTLec->getDTEjercicios().size(); i++) {
+        l->AgregateEjercicio(DTLec->getDTEjercicios()[i]);
     }
 
 }
@@ -130,12 +129,6 @@ void Curso::EliminarCursoPrevio(Curso* c) {
     this->cursosPrevios->remove(ik); /* 4.8*.1 remove(C) */
 }
 
-
-
-/*Operaciones alta curso*/
-
-
-
 void Curso::agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev){
 	
 	this->cursosPrevios->add(nombreCPrev ,cPrev);
@@ -152,7 +145,6 @@ void Curso::agregateProfesor(Profesor* profDeCurso){
 }
 
 
-/*Operaciones de consultar estadisticas*/
 
 DTProgresoCurso* Curso::obtenerEstadisticasCursos(){
     float Progreso = 0;
@@ -167,93 +159,3 @@ DTProgresoCurso* Curso::obtenerEstadisticasCursos(){
 
     return Prog;
 }
-
-
-
-/*Operaciones de habilitar curso*/
-
-bool Curso:: tieneLecciones(){
-	return !(this->misLecciones->isEmpty());
-}
-
-
-/*Operaciones de Inscribirse a curso*/
-vector<string> Curso::getPrevios(){
-	vector<string> nombresPrevios;
-	IIterator* iter = this->cursosPrevios->getIterator();
-	while(iter->hasCurrent()){
-		nombresPrevios.push_back((dynamic_cast<Curso*>(iter->getCurrent())->getNombreCurso()));
-		iter->next();
-	}
-	return nombresPrevios;
-}
-
-
-DTCurso* Curso::getDTCurso(){
-	int cantEjercicios=0;
-	int cantLecciones = this->misLecciones->getSize();
-	IIterator* iter = this->misLecciones->getIterator();
-	while(iter->hasCurrent()){
-		Leccion* aux = (Leccion*)iter->getCurrent();
-		cantEjercicios = cantEjercicios + (aux->obtenerCantEjercicios());
-		iter->next();
-	}
-	DTCurso* curso = new DTCurso(this->nombreCurso, this->profeCurso->getNickname(), this->descrpicionCurso,this->idiomaCurso->getNombreIdioma(),this->dificultad, cantLecciones,cantEjercicios);
-	return curso;
-}
-
-void Curso::agregateInscripcion(Inscripcion* ins){
-	this->misInscripciones->add(ins);
-}
-
-Leccion* Curso::getUltimaLeccionACursar(){
-	Leccion* lec;
-	IIterator* iter = this->misLecciones->getIterator();
-	while(iter->hasCurrent()){
-		lec = (Leccion*)iter->getCurrent();
-		break;
-	}
-	return lec;
-}
-
-vector<string> Curso::obtenerLecciones(){
-	vector<string> lecciones;
-	IIterator* iter = this->misLecciones->getIterator();
-	while(iter->hasCurrent()){
-		lecciones.push_back(((Leccion*)iter->getCurrent())->getTema());
-		iter->next();
-	}
-	return lecciones;
-}
-
-Leccion* Curso::buscarLeccion(string leccion){
-	const char* lec = leccion.c_str();
-	IKey* key = new String(lec);
-	Leccion* l = dynamic_cast<Leccion*>(this->misLecciones->find(key));
-	return l;
-}
-
-
-DTInfoCurso* Curso::getInfo(){
-	IIterator* it=this->misLecciones->getIterator();
-	vector<DTLeccion*> listaLecciones;
-	while(it->hasCurrent()){
-		Leccion* leccion = (Leccion*) it->getCurrent();
-		DTLeccion* dtLec=leccion->getInfo();
-		listaLecciones.push_back(dtLec);
-		it->next();
-	}
-	
-	it=this->misInscripciones->getIterator();
-	vector<DTInscripcion*> listaInscripciones;
-	while(it->hasCurrent()){
-		Inscripcion* inscripcion= (Inscripcion*) it->getCurrent();
-		DTInscripcion* dtInsc=inscripcion->getInfo();
-		listaInscripciones.push_back(dtInsc);
-		it->next();
-	}
-	
-	DTInfoCurso* dtInfo=new DTInfoCurso(this->nombreCurso,this->descrpicionCurso,this->dificultad,this->idiomaCurso->getNombreIdioma(),this->profeCurso->getNombreU(),listaLecciones,listaInscripciones);
-	//DTInfoCurso* dtInfo= new DTInfoCurso(this->nombreCurso,this->descripcionCurso,this->dificultad,this->idiomaCurso,
-	
-	return dtInfo;

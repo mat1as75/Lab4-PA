@@ -18,3 +18,11 @@ DTInscripcion::DTInscripcion(string nombre, Date* fechaInscripcion){
 	this->nombre=nombre;
 	this->fechaInscripcion=fechaInscripcion;
 }
+
+string DTInscripcion::getNombreEstudiante(){
+    return this->nombre;
+}
+
+Date* DTInscripcion::getFechaInscripcion(){
+    return this->fechaInscripcion;
+}

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
-#include "Profesor.h"
+#include "../Header/Profesor.h"
 #include "../DataTypes/DTProgresoCurso.h"
 #include "../DataTypes/DTProfesor.h"
 #include "../ICollection/collections/OrderedDictionary.h"

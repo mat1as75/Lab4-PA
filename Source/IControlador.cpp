@@ -1,4 +1,4 @@
-#include "IControlador.h"
+#include "../Header/IControlador.h"
 
 IControlador::IControlador() {
 	

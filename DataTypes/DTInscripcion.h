@@ -8,6 +8,8 @@ public:
 	DTInscripcion(string nombreCurso, string nickname, Date* fechaInscripcion);
 	DTInscripcion(string nombre, Date* fechaInscripcion);
 	~DTInscripcion();
+	string getNombreEstudiante();
+	Date* getFechaInscripcion();
 	
 private:
 	string nombreCurso;

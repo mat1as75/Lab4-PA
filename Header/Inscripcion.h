@@ -21,9 +21,9 @@ class Estudiante;
 #include "Curso.h"
 class Curso;
 #include "../ICollection/interfaces/ICollectible.h"
-#include "DataTypes/DTProgresoCurso.h"
-#include "DataTypes/DTInscripcion.h"
-#include "DataTypes/DTRealizaEjercicio.h"
+#include "../DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTInscripcion.h"
+#include "../DataTypes/DTRealizaEjercicio.h"
 class DTRealizaEjercicio;
 #include "Leccion.h"
 class Leccion;

@@ -92,8 +92,8 @@ public:
     vector <string>listarIdiomasDisponibles();
     void ingresarIdiomaEspecializado(string nombreIdioma);
     bool altaUsuario();
-
     bool ingresarIdioma(string idioma);
+
     /* Agregar Leccion */
     vector<string> listarCursosNoHabilitados();
     void SeleccionarCurso(string nombreCurso);

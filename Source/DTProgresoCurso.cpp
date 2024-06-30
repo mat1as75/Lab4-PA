@@ -1,4 +1,4 @@
-#include "DTProgresoCurso.h"
+#include "../DataTypes/DTProgresoCurso.h"
 
 DTProgresoCurso::DTProgresoCurso() {
 	

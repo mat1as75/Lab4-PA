@@ -1,4 +1,4 @@
-#include "DTUsuario.h"
+#include "../DataTypes/DTUsuario.h"
 
 DTUsuario::DTUsuario() {
 	

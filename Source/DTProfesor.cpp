@@ -1,6 +1,6 @@
-#include "DTProfesor.h"
-#include "OrderedDictionary.h"
-#include "Idioma.h"
+#include "../DataTypes/DTProfesor.h"
+#include "../ICollection/collections/OrderedDictionary.h"
+#include "../Header/Idioma.h"
 DTProfesor::DTProfesor() {
 	
 }

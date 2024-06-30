@@ -1,4 +1,4 @@
-#include "DTCURSO.h"
+#include "../DataTypes/DTCurso.h"
 #include "OrderedDictionary.h"
 #include "Idioma.h"
 
@@ -11,7 +11,7 @@ DTCurso::DTCurso(string nombreCurso,string nombreProfesor,string descripcionCurs
 	this->nombreProfesor= nombreProfesor;
 	this->descCurso=descripcionCurso;
 	this->nombreIdioma=nombreIdioma;
-	this->dificultad=dificultad;
+	this->dificultad=(Dificultad)dificultad;
 	this->cantLecciones= cantLecciones;
 	this->cantEjercicios= cantEjercicios;
 }
@@ -22,7 +22,7 @@ DTCurso::~DTCurso() {
  DTCurso::DTCurso(string nombreCurso, string descCurso, Dificultad dif){
     this->nombreCurso = nombreCurso;
     this->descCurso = descCurso;
-    this->dificultad = dif;
+    this->dificultad = (Dificultad)dif;
  }
 
 string DTCurso:: getNombreCurso(){

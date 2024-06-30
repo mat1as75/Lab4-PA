@@ -19,10 +19,10 @@
 #include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
 #include "Inscripcion.h"
-#include "DataTypes/DTProgresoCurso.h"
-#include "DataTypes/DTUsuario.h"
+#include "../DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTUsuario.h"
 #include "../ICollection/interfaces/IDictionary.h"
-#include "DataTypes/DTRealizaEjercicio.h"
+#include "../DataTypes/DTRealizaEjercicio.h"
 #include "../ICollection/interfaces/ICollection.h"
 class DTRealizaEjercicio;
 class Curso;

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/cppFiles/file.cc to edit this template
  */
 
-#include "Fabrica.h"
+#include "../Header/Fabrica.h"
 
 Fabrica::Fabrica() {
 }
