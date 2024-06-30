@@ -18,10 +18,12 @@
 #include "Idioma.h" /* Dependencia en Diagrama de Clases */
 #include "DTUsuario.h"
 #include "DataTypes/DTProgresoCurso.h"
+#include "../ICollection/interfaces/IDictionary.h"
+
 using namespace std;
 
 class Profesor: public Usuario {
-protected:
+private:
 	string instituto;
 	IDictionary* idiomasEspecializado; /* Lista de idiomas en los que se especializa el profesor */
 	ICollection* misCursos;

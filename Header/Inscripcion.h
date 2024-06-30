@@ -19,8 +19,17 @@
 #include "Estudiante.h"
 class Estudiante;
 #include "Curso.h"
+class Curso;
 #include "../ICollection/interfaces/ICollectible.h"
 #include "DataTypes/DTProgresoCurso.h"
+#include "DataTypes/DTInscripcion.h"
+#include "DataTypes/DTRealizaEjercicio.h"
+class DTRealizaEjercicio;
+#include "Leccion.h"
+class Leccion;
+#include "Ejercicio.h"
+class Ejercicio;
+
 
 class Inscripcion: public ICollectible{
 private:
@@ -28,10 +37,13 @@ private:
     float progresoCurso;
     Estudiante* miEstudiante;
     Curso* miCurso;
+    Leccion* leccionActual;
+    IDictionary* ejerciciosAprobados;
 public:
     string getNombreCurso();
     Inscripcion();
     Inscripcion(const Inscripcion& orig);
+    Inscripcion(Date* fechaInsc, Curso* curso, Leccion* leccion);
     virtual ~Inscripcion();
     ICollectible* getCurso();
 
@@ -40,6 +52,20 @@ public:
     
     DTProgresoCurso* getProgresoCurso();
 	float obtenerProgreso();
+
+    /*Operaciones de Conultar Curso*/
+    DTInscripcion* getInfo();
+
+    /*Operaciones de inscribirse a curso*/
+    void cursoAgregaInscripcion();
+    string getNombreCurso();
+
+    /*Operaciones de Realizar Ejercicio*/
+    vector<DTRealizaEjercicio*> obtenerEjercicios();
+    vector<string> obtenerSolucion(string ejARealizar );
+	void agregarEjercicioAprobado(string nomEjercicio);
+	void agregameComoAprobado(Ejercicio* ej);
+
 };
 
 #endif /* INSCRIPCION_H */

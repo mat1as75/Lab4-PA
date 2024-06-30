@@ -15,9 +15,10 @@
 
 #include <string>
 #include <vector>
+#include "../ICollection/interfaces/ICollectible.h"
 using namespace std;
 
-class Idioma {
+class Idioma : public ICollectible{
 private:
 	string nombreIdioma;
 public:

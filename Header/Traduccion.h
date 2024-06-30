@@ -25,7 +25,7 @@ public:
   ~Traduccion();
   Traduccion(DTEjercicio* DTEj);
   Traduccion(string nombreEjericio, string descripcionEjercicio, string fraseATraducir, string fraseSolucion);
-
+  string getSolucion() override;
   string getFraseATraducir();
   string getFraseSolucion();
 };

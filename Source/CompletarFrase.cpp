@@ -1,5 +1,8 @@
 #include "../Header/CompletarFrase.h"
 #include "../DataTypes/DTEjercicio.h"
+#include <string.h>
+#include "String.h"
+
 
 CompletarFrase::CompletarFrase() {
     
@@ -29,6 +32,17 @@ string CompletarFrase::getFraseIncompleta() {
 
 vector<string> CompletarFrase::getPalabrasSolucion() {
     return this->palabrasSolucion;
+}
+string CompletarFrase::getSolucion(){
+	string solucionConCat;
+	for(int i=0; i< (int)this->palabrasSolucion.size(); i++){
+		if(i==0){
+			solucionConCat = solucionConCat + palabrasSolucion[i];
+		}else{
+			solucionConCat = solucionConCat + "-" + palabrasSolucion[i];
+		}
+	}
+	return solucionConCat;
 }
 
 

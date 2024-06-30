@@ -28,6 +28,7 @@ public:
 
   string getFraseIncompleta();
   vector<string> getPalabrasSolucion();
+  string getSolucion() override;
 };
 
 #endif /* COMPLETARFRASE_H */

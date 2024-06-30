@@ -30,3 +30,6 @@ string Traduccion::getFraseATraducir() {
 string Traduccion::getFraseSolucion() {
     return this->fraseSolucion;
 }
+string Traduccion::getSolucion(){
+	return this->fraseSolucion;
+}
