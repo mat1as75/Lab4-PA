@@ -34,6 +34,7 @@ public:
   ~Leccion();
   Leccion(string tema, string objAprendizaje);
   string getTema();
+  string getObjAprendizaje();
 
   /* Operacione de AltaLeccion */
   void AgregateEjercicio(DTEjercicio* ej);

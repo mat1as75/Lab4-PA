@@ -30,7 +30,7 @@
 #include "DataTypes/DTProgresoCurso.h"
 using namespace std;
 
-int main () {
+
 	
     /*Date* date1 = new Date(28, 07, 2002);
     Estudiante* e1 = new Estudiante("mat1", "matias702", "Matias Alfaro", "Buen estudiante", "Uruguay", date1);
@@ -42,7 +42,7 @@ int main () {
     //Fabrica* fb = new Fabrica();
     //IControlador* controller = fb->getControlador();
     
-    cout << "Hello, I'm Matias!" << endl;
+    
     //Collectible* e1 = new Estudiante();
         
     int main (int argc, char *argv[]) {
@@ -382,7 +382,7 @@ int main () {
 				cout<<idiomas[i] <<endl;
 			}
 			break;
-			}
+		}
 		case 5:{
 			
             string nombreCurso, nicknameProfe, descripcionCurso,nombreIdioma, nombreCursoPrev;
@@ -407,7 +407,7 @@ int main () {
 				cout<<"La dificultad ingresada no corresponde, por favor ingrese una de las siguiente opciones."<<endl;
 				cout<<"Ingrese dificultad (Principiante(P)/Medio(M)/Avanzado(A): "<<endl;
 				scanf("%c",&dificultad);
-			};
+			}
 			switch(dificultad){
 			case 'A':{
 				con->ingresarDatosCurso(nicknameProfe,nombreCurso,descripcionCurso,Avanzado);
@@ -446,6 +446,10 @@ int main () {
 			}
 			//AQUI VA LO REFERENCIADO EN AGREGAR LECCION/EJERCICIO!!!!!
 			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			char op;
+			cout << "Desea ingresar Lecciones? S/N";
+			cin >> op;
+
 			
 			if(con->AltaCurso()){
 				cout<<"Curso creado con exito"<<endl;
@@ -453,8 +457,9 @@ int main () {
 				cout<<"¡Este curso ya existe en el sistema!"<<endl;
 			}
 			break;
-			};
-			case 6: {
+		}
+		case 6: {
+			
 			cout<<"Seleccione uno por favor...  \n 1.Estadisticas de Estudiantes \n 2.Estadisticas de Profesores \n 3.Estadisticas de cursos \n 4.Salir: "<<endl;
 			cin>>opcion;
 			fflush(stdin);
@@ -561,47 +566,46 @@ int main () {
 					cout << "error: No hay cursos en el Sistema" << endl;
 					break;
 				}else{
-				string user;
-				vector<string> cursosHab=con->listarCursosHabilitados();
-				for (int i=0; i<(int)cursosHab.size(); i++){
-					cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
-				}
-				cout<<"Seleccione un Curso: "<<endl;
-				getline(cin,user);
-				
-				const char* userChar=user.c_str();
-				IKey* key= new String(userChar);
-				
-				if(con->getCursosHabilitados()->member(key)==false){
-					cout<<endl;
-					while(con->getCursosHabilitados()->member(key)==false){
-						cout<<"El curso ingresado no existe, ingrese uno valido: "<<endl;
-						cout<<endl;
-						cout<<"Cursos disponibles :"<<endl;
-						cout<<endl;
-						for (int i=0; i<(int)cursosHab.size(); i++){
-							cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
-						}
-						cout<<endl;
-						cout<<"> ";
-						getline(cin,user);
-						userChar=user.c_str();
-						key= new String(userChar);
+					string user;
+					vector<string> cursosHab=con->listarCursosHabilitados();
+					for (int i=0; i<(int)cursosHab.size(); i++){
+						cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
 					}
+					cout<<"Seleccione un Curso: "<<endl;
+					getline(cin,user);
+					
+					const char* userChar=user.c_str();
+					IKey* key= new String(userChar);
+					
+					if(con->getCursosHabilitados()->member(key)==false){
+						cout<<endl;
+						while(con->getCursosHabilitados()->member(key)==false){
+							cout<<"El curso ingresado no existe, ingrese uno valido: "<<endl;
+							cout<<endl;
+							cout<<"Cursos disponibles :"<<endl;
+							cout<<endl;
+							for (int i=0; i<(int)cursosHab.size(); i++){
+								cout<<"Nombre del Curso" << i+1 << ":" <<cursosHab[i]<<endl;
+							}
+							cout<<endl;
+							cout<<"> ";
+							getline(cin,user);
+							userChar=user.c_str();
+							key= new String(userChar);
+						}
+					}
+					cout<<endl;
+					DATA_PROGRESO_CURSO* Stats =  con->MostrarProgresoCurso(user);
+					cout << Stats <<endl;
+					cout<<endl<<endl;
 				}
-				cout<<endl;
-				DATA_PROGRESO_CURSO* Stats =  con->MostrarProgresoCurso(user);
-				cout << Stats <<endl;
-				cout<<endl<<endl;
 				break;
-			}
-		}
-	}
-}
+			};
 		};
 	} while(opcion!=7);
+
     return 0;
-};
+}
 
 /*int opcion = 0;
     

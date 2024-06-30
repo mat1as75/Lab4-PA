@@ -15,6 +15,10 @@ string Leccion::getTema() {
     return this->tema;
 }
 
+string Leccion::getObjAprendizaje() {
+    return this->objAprendizaje;
+}
+
 void Leccion::AgregateEjercicio(DTEjercicio* ej) {
     
     DTCompletarFrase* DTEjer = (DTCompletarFrase*) ej;

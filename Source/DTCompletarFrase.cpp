@@ -21,3 +21,11 @@ string DTCompletarFrase::getFraseIncompleta() {
 vector<string> DTCompletarFrase::getPalabrasSolucion() {
     return this->palabrasSolucion;
 }
+
+string DTCompletarFrase::getFraseATraducir() {
+
+}
+
+string DTCompletarFrase::getFraseSolucion() {
+
+}

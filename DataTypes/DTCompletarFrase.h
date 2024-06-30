@@ -25,10 +25,13 @@ private:
 public:
     DTCompletarFrase();
     DTCompletarFrase(string tipoEjercicio, string nombre, string descripcion, string fraseIncompleta, vector<string> palabrasSolucion);
-    virtual ~DTCompletarFrase();
+    ~DTCompletarFrase();
 
-    string getFraseIncompleta();
-    vector<string> getPalabrasSolucion();
+    string getFraseIncompleta() override;
+    vector<string> getPalabrasSolucion() override;
+
+    string getFraseATraducir() override;
+    string getFraseSolucion() override;
 };
 
 #endif /* DTCOMPLETARFRASE_H */

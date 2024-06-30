@@ -27,7 +27,7 @@ protected:
 public:
     DTEjercicio();
     DTEjercicio(string tipoEjercicio, string nombre, string descripcion);
-    virtual ~DTEjercicio();
+    ~DTEjercicio();
 
     string getTipoEjercicio();
     string getNombreEjercicio();

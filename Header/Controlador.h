@@ -16,7 +16,9 @@
 #include <string>
 #include <vector>
 #include "../ICollection/interfaces/ICollectible.h"
+#include "../ICollection/interfaces/ICollection.h"
 #include "../ICollection/interfaces/IDictionary.h"
+#include "../ICollection/interfaces/OrderedKey.h"
 #include "IControlador.h"
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 #include "Usuario.h" /* Dependencia en Diagrama de Clases */
@@ -46,12 +48,12 @@ protected:
     Curso* cursoSeleccionado; // Puntero auxiliar al curso para la oper SelecionarCurso(string nombreCurso)
     DTLeccion* auxDTLeccion; // Datatype Leccion auxiliar
     DTCurso* cursoACrear; //auxiliar con los datos del curso a crear   
-    ICollection* auxDTEjercicios; // Coleccion Datatype Ejecicio auxiliar
+    vector<DTEjercicio*> auxDTEjercicios; // Coleccion Datatype Ejecicio auxiliar
     string nickname,contrasena,nombre,descripcion,paisRes,instituto; //auxiliares para alta usuario
     Date* fecNac;
     IDictionary* misIdiomasAuxiliares;// coleccion auxiliar de idiomas para crear profesor
 
-    IDictionary* DTEjerciciosAux; /* Coleccion auxiliar de DTEjercicios */
+    vector<DTLeccion*> DTLeccionesAux; /* Vector Auxiliar para AltaCurso */
 public:
     static Controlador* getInstance(); // 3 de Singleton
     virtual ~Controlador();
@@ -83,6 +85,7 @@ public:
     vector<string> listarCursosNoHabilitados();
     void SeleccionarCurso(string nombreCurso);
     void IngresarDatosLeccion(string tema, string objAprendizaje);
+    void IngresarLeccion(string tema, string objAprendizaje);
 
     /*Consulta Usuario*/
     vector <string> listarUsuarios();
@@ -101,6 +104,7 @@ public:
     vector<string> listarCursosNoHabilitados() override;
     void SeleccionarCurso(string nombreCurso) override;
     void IngresarDatosLeccion(string tema, string objAprendizaje) override;
+    void agregateLeccion(DTLeccion* DTLec) override;
     void AltaLeccion() override;
      
     /* Operaciones de Agregar Ejercicio */

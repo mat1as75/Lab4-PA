@@ -24,10 +24,13 @@ private:
 public:
     DTTraduccion();
     DTTraduccion(string tipoEjercicio, string nombreEjercicio, string descEjercicio, string fraseATraducir, string fraseSolucion);
-    virtual ~DTTraduccion();
+    ~DTTraduccion();
 
-    string getFraseATraducir();
-    string getFraseSolucion();
+    string getFraseATraducir() override;
+    string getFraseSolucion() override;
+
+    string getFraseIncompleta() override;
+    vector<string> getPalabrasSolucion() override;
 };
 
 #endif /* DTTRADUCCION_H */

@@ -21,3 +21,11 @@ string DTTraduccion::getFraseATraducir() {
 string DTTraduccion::getFraseSolucion() {
     return this->fraseSolucion;
 }
+
+string DTTraduccion::getFraseIncompleta() {
+
+}
+
+vector<string> DTTraduccion::getPalabrasSolucion() {
+
+}

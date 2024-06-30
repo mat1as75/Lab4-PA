@@ -22,7 +22,7 @@ class Profesor;
 class Inscripcion;
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
 #include "DTLeccion.h"
-#include "../ICo.h"
+#include "ICollection/interfaces/ICollection.h"
 #include "ICollection/interfaces/ICollectible.h"
 #include "ICollection/interfaces/IDictionary.h"
 #include "Profesor.h"
@@ -54,13 +54,15 @@ public:
 	string getNombreCurso();
 	string getDificultad();
 
+	/* Operaciones de AltaCurso */
 	void agregateProfesor(Profesor* profDeCurso);
 	void agregateIdioma(Idioma* idiomaDeCurso);
 	void agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev);
+	void agregateLeccion(DTLeccion* DTLec);
 
 	/* Operaciones de AltaLeccion */
 	void AgregateLeccion(DTLeccion* DTLec);
-	void AgregateEjercicio(IDictionary* DTEjercicios);
+	void AgregateEjercicio(vector<DTEjercicio*> DTEjercicios);
 
 	/* Operaciones de EliminarCurso */
     void EliminarProfesor();

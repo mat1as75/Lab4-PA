@@ -25,12 +25,13 @@ private:
     vector<DTEjercicio*> misEjercicios;
 public:
     DTLeccion();
-    DTLeccion(const DTLeccion& orig);
+    DTLeccion(string tema, string objAprendizaje);
     virtual ~DTLeccion();
     void setTema(string tema);
     string getTema();
     void setObjAprendizaje(string objAprendizaje);
     string getObjAprendizaje();
+    vector<DTEjercicio*> getMisEjercicios();
 };
 
 #endif /* DTLECCION_H */

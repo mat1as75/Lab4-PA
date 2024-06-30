@@ -19,7 +19,6 @@
 #include "Usuario.h"
 #include "Profesor.h"
 #include "Date.h"
-#include "../ICo.h"
 using namespace std;
 
 class IControlador: ICollectible {
@@ -48,6 +47,8 @@ public:
     virtual vector<string> listarCursosNoHabilitados() = 0;
     virtual void SeleccionarCurso(string nombreCurso) = 0;
     virtual void IngresarDatosLeccion(string tema, string objAprendizaje) = 0;
+    virtual void IngresarLeccion(string tema, string objAprendizaje) = 0;
+    virtual void agregateLeccion(DTLeccion* DTLec) = 0;
     virtual void AltaLeccion() = 0;
     
     /* Operaciones de Agregar Ejercicio */

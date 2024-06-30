@@ -4,7 +4,6 @@
  */
 
 #include "../Header/Curso.h"
-#include "../ICo.h"
 #include "../ICollection/interfaces/ICollectible.h"
 #include "../DataTypes/DTLeccion.h"
 
@@ -50,24 +49,40 @@ void Curso::AgregateLeccion(DTLeccion* DTLec) {
     this->misLecciones->add(ik, Lec);
 }
 
-void Curso::AgregateEjercicio(IDictionary* DTEjercicios) {
+void Curso::AgregateLeccion(DTLeccion* DTLec) {
+    /* 9*.1 L := create(DATALECCION) */
+    Leccion* l = new Leccion(DTLec->getTema(), DTLec->getObjAprendizaje());
+
+    const char* temaLeccion = l->getTema().c_str();
+    OrderedKey* ik = new String(temaLeccion);   
+
+    /* 9*.2 add(L) */
+    this->misLecciones->add(ik, (ICollectible*)l);
+
+    /* [for all DATAEJERCICIO in set<DATAEJERCICIO>] */
+    /* 9*.3 agregateEjercicio(DATAEJERCICIO) */
+    
+    for(int i = 0; i < (int)DTLec->getMisEjercicios().size(); i++) {
+        l->AgregateEjercicio(DTLec->getMisEjercicios()[i]);
+    }
+
+}
+
+void Curso::AgregateEjercicio(vector<DTEjercicio*> DTEjercicios) {
     /* [for all DATAEJERCICIO in set<DATAEJERCICIO>] */
     /* 2* AgregateEjercicio(DATAEJERCICIO) */
-    
-    IIterator* iter = DTEjercicios->getIterator();
-    
-    while(iter->hasCurrent()) {
-        DTEjercicio* ej = (DTEjercicio*) iter->getCurrent();
-        
-        if(ej->getTipoEjercicio().compare("T") == 0)  /* Es DTTraduccion */
-            ej = (DTTraduccion*) iter->getCurrent();
-        else
-            ej = (DTCompletarFrase*) iter->getCurrent();
-		
-        ((Leccion*)this->misLecciones)->AgregateEjercicio(ej);
-        iter->next();
+
+    for(int i = 0; i < (int)DTEjercicios.size(); i++) {
+        if(DTEjercicios[i]->getTipoEjercicio().compare("T") == 0) { /* Es DTTraduccion */
+            DTEjercicios[i] = dynamic_cast<DTTraduccion*>(DTEjercicios[i]);
+        }else{
+            DTEjercicios[i] = dynamic_cast<DTCompletarFrase*>(DTEjercicios[i]);
+        }
+        ((Leccion*)this->misLecciones)->AgregateEjercicio(DTEjercicios[i]);
     }
 }
+
+
 
 void Curso::EliminarProfesor() {
     /* 3.1 EliminarCurso(c) */
@@ -128,6 +143,8 @@ void Curso::agregateProfesor(Profesor* profDeCurso){
 	this->profeCurso = profDeCurso;
 	
 }
+
+
 
 DTProgresoCurso* Curso::obtenerEstadisticasCursos(){
     float Progreso = 0;

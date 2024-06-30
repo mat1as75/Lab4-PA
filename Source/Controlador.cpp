@@ -10,7 +10,9 @@
 #include "Header/Curso.h"
 #include "DTCurso.h"
 #include "DataTypes/DTProgresoCurso.h"
-#include "../ICo.h"
+#include "../ICollection/interfaces/ICollection.h"
+#include "../ICollection/interfaces/ICollectible.h"
+#include "../ICollection/interfaces/OrderedKey.h"
 using namespace std;
 
 Controlador* Controlador::miInstancia = nullptr;
@@ -83,31 +85,32 @@ void Controlador::IngresarDatosLeccion(string tema, string objAprendizaje) {
     this->auxDTLeccion->setObjAprendizaje(objAprendizaje);
 }
 
+void Controlador::IngresarLeccion(string tema, string objAprendizaje) {
+	/* Creo un DTLeccion y la agrego a la coleccion 
+	de DTLeccionesAux del controlador */
+	DTLeccion* DTLec = new DTLeccion(tema, objAprendizaje);
+	this->DTLeccionesAux.push_back(DTLec);
+}
+
 void Controlador::AltaLeccion() {
     // 1 agregateLeccion()
     this->cursoSeleccionado->AgregateLeccion(this->auxDTLeccion);
 
-    this->cursoSeleccionado->AgregateEjercicio(this->DTEjerciciosAux);
+    this->cursoSeleccionado->AgregateEjercicio(this->auxDTEjercicios);
 }
 
 void Controlador::IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) {
     DTCompletarFrase* aux = new DTCompletarFrase("CF", nombreEjercicio, descripcion, fraseACompletar, palabrasSolucion);
     
-    const char* nombreC = aux->getNombreEjercicio().c_str();
-    OrderedKey* ik = new String(nombreC);
-    
     /* Agrego DTEjercicio a coleccion de DTEjercicios auxiliar */
-    this->DTEjerciciosAux->add(ik, dynamic_cast<ICollectible*> aux);
+    this->auxDTEjercicios.push_back(aux);
 }
 
 void Controlador::IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) {
     DTTraduccion* aux = new DTTraduccion("T", nombreEjercicio, descripcion, fraseATraducir, fraseTraducida);
     
-    const char* nombreC = aux->getNombreEjercicio().c_str();
-    OrderedKey* ik = new String(nombreC);
-    
     /* Agrego DTEjercicio a coleccion de DTEjercicios auxiliar */
-    this->DTEjerciciosAux->add(ik, dynamic_cast<ICollectible*> aux);
+    this->auxDTEjercicios.push_back(aux);
 }
 
 vector<string> Controlador::ListarCursos() {
@@ -238,12 +241,15 @@ bool Controlador::AltaCurso(){
 					it->next();
 				}
 			}
-			//###########################################
-			//###########################################
-			//!!!!!!! Las Lecciones y ejercicios!!!!!!!!!
-			//###########################################
-			//###########################################
 			
+			/* LECCIONES Y EJERCICIOS */
+			/* [for all DATALECCION in set<DATALECCION>] */
+			if (!this->DTLeccionesAux.empty()) {
+				for(int i = 0; i < (int)this->DTLeccionesAux.size(); i++) {
+					/* 9* agregateLeccion(DATALECCION) */
+					cursoNuevo->agregateLeccion(this->DTLeccionesAux[i]);
+				}
+			}
 			
 			this->CursosNoHabilitados->add(ik, cursoNuevo);
 			retorno = true;
