@@ -283,9 +283,10 @@ void Controlador::EliminarCurso(string nombreCurso) {
     c->EliminarProfesor(); /* 3 EliminarProfesor() */
     c->EliminarInscripciones(); /* 4 EliminarInscripciones() */
     delete(c); /* 5 destroy() */
+}
 
 /*Operaciones de Consulta Usuario*/
-vector <string> Controlador::listarUsuarios(){
+vector<string> Controlador::listarUsuarios(){
 	vector<string> listaUsuarios;
 	IIterator* it=this->Estudiantes->getIterator();
 	while(it->hasCurrent()){
@@ -700,4 +701,29 @@ bool Controlador::apruebaEjercicio(string solucionUsuario,string solucionEjercic
 	}
 	
 	return aprobo;
+}
+
+
+
+DTInfoCurso* Controlador::mostrarInfoCurso(string nombreCurso){
+	const char* nomCurso=nombreCurso.c_str();
+	
+	IKey* key=new String(nomCurso);
+	DTInfoCurso* infoCurso;
+	ICollectible* icCurso=this->CursosHabilitados->find(key);
+	Curso* curso= (Curso*)icCurso;
+	
+	if(curso!=NULL){
+		infoCurso=curso->getInfo();
+		return infoCurso;
+	}else{
+		icCurso=this->CursosNoHabilitados->find(key);
+		 curso= (Curso*)icCurso;
+		if(icCurso!=NULL){
+			infoCurso=curso->getInfo();
+			return infoCurso;
+		}else{
+			return NULL;
+		}
+	}
 }

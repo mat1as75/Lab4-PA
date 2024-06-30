@@ -101,7 +101,7 @@ public:
     void IngresarLeccion(string tema, string objAprendizaje);
 
     /*Consulta Usuario*/
-    vector <string> listarUsuarios();
+    vector<string> listarUsuarios();
     DTUsuario* mostrarInfoUsuario(string nickname);
     
     /*Alta Curso*/
@@ -137,6 +137,7 @@ public:
 
     /*Operaciones de Consultar Curso*/
     vector <string> listarCursos();
+    DTInfoCurso* mostrarInfoCurso(string nombreCurso);
 
     /*Operaciones de Habilitar Curso*/
     bool cursoPerteneceNoHab(string nomCurso);

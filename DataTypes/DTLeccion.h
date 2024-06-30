@@ -26,6 +26,7 @@ private:
 public:
     DTLeccion();
     DTLeccion(string tema, string objAprendizaje);
+    DTLeccion(string tema, string objAprendizaje, vector<DTEjercicio*> misEjercicios);
     virtual ~DTLeccion();
     void setTema(string tema);
     string getTema();
