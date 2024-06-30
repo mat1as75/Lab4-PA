@@ -4,7 +4,7 @@
  */
 
 #include "../Header/Curso.h"
-#include "../ICollection/interfaces/ICollectible.h"
+//#include "../ICollection/interfaces/ICollectible.h"
 #include "../DataTypes/DTLeccion.h"
 
 Curso::Curso() {

@@ -18,7 +18,7 @@
 #include "Ejercicio.h" /* Dependencia en Diagrama de Clases */
 #include "CompletarFrase.h"
 #include "Traduccion.h"
-#include "../ICo.h"
+#include "../ICollection/interfaces/ICollection.h"
 #include "../DataTypes/DTEjercicio.h"
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"

@@ -22,9 +22,9 @@ class Profesor;
 class Inscripcion;
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
 #include "DTLeccion.h"
-#include "ICollection/interfaces/ICollection.h"
-#include "ICollection/interfaces/ICollectible.h"
-#include "ICollection/interfaces/IDictionary.h"
+#include "../ICollection/interfaces/ICollection.h"
+#include "../ICollection/interfaces/ICollectible.h"
+#include "../ICollection/interfaces/IDictionary.h"
 #include "Profesor.h"
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"

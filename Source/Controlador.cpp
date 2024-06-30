@@ -5,11 +5,11 @@
 
 #include <iostream>
 #include <string>
-#include "Header/Controlador.h"
-#include "Header/Usuario.h"
-#include "Header/Curso.h"
-#include "DTCurso.h"
-#include "DataTypes/DTProgresoCurso.h"
+#include "../Header/Controlador.h"
+#include "../Header/Usuario.h"
+#include "../Header/Curso.h"
+#include "../DataTypes/DTCurso.h"
+#include "../DataTypes/DTProgresoCurso.h"
 #include "../ICollection/interfaces/ICollection.h"
 #include "../ICollection/interfaces/ICollectible.h"
 #include "../ICollection/interfaces/OrderedKey.h"
@@ -211,8 +211,10 @@ void Controlador::buscarCursoPrevio(string nombreCursoPrev){
 	const char* cursoP = nombreCursoPrev.c_str();
 	OrderedKey* key = new String(cursoP);
 	
-	ICollectible* auxCursoPrevio = this->CursosHabilitados->find(key);
-	this->auxCursosPrev->add(key,auxCursoPrevio);
+	ICollectible* auxCursoPrevio = (ICollectible*) this->CursosHabilitados->find(key);
+	//Curso* auxCursoPrevio = dynamic_cast<Curso*>(this->CursosHabilitados->find(key));
+
+	this->auxCursosPrev->add(key, auxCursoPrevio);
 }
 
 bool Controlador::AltaCurso(){

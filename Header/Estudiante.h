@@ -18,7 +18,6 @@
 #include "Curso.h" /* Dependencia en Diagrama de Clases */
 #include "Inscripcion.h" /* Dependencia en Diagrama de Clases */
 #include "Date.h"
-#include "../ICo.h"
 #include "Inscripcion.h"
 #include "DataTypes/DTProgresoCurso.h"
 using namespace std;
