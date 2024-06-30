@@ -13,6 +13,8 @@
 #include "../Header/Inscripcion.h"
 #include "../Header/Estudiante.h"
 #include "DataTypes/DTProgresoCurso.h"
+#include "../DataTypes/DTRealizaEjercicio.h"
+#include "String.h"
 
 Inscripcion::Inscripcion() {
 }
@@ -47,3 +49,36 @@ float Inscripcion:: obtenerProgreso(){
 }
 
 
+
+DTInscripcion* Inscripcion::getInfo(){
+	DTInscripcion* dtInsc=new DTInscripcion(this->miEstudiante->getNombreU(),this->fechaInscripcion);
+	return dtInsc;
+}
+
+void Inscripcion::cursoAgregaInscripcion(){
+	this->miCurso->agregateInscripcion(this);
+}
+
+string Inscripcion::getNombreCurso(){
+	return this->miCurso->getNombreCurso();
+}
+vector<DTRealizaEjercicio*> Inscripcion::obtenerEjercicios(){
+	vector<DTRealizaEjercicio*> ejercicios;
+	ejercicios = this->leccionActual->obtenerEjercicios(this->ejerciciosAprobados);
+	return ejercicios;
+	
+}
+vector<string> Inscripcion::obtenerSolucion(string ejARealizar){
+	vector<string> solucion;
+	solucion = this->leccionActual->obtenerSolucion( ejARealizar);
+	return solucion;
+}
+
+void Inscripcion::agregarEjercicioAprobado(string nomEjercicio){
+	this->leccionActual->agregarEjercicioAprobado(nomEjercicio, this);
+}
+void Inscripcion::agregameComoAprobado(Ejercicio* ej){
+	const char* ejercicio=(ej->getNombreEjercicio()).c_str();
+	IKey* key = new String(ejercicio);
+	this->ejerciciosAprobados->add(key ,ej);
+}

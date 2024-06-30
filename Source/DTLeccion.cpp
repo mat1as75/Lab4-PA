@@ -2,12 +2,21 @@
 
 DTLeccion::DTLeccion() {
 }
-
-DTLeccion::DTLeccion(string tema, string objAprendizaje) {
-    this->tema = tema;
-    this->objAprendizaje = objAprendizaje;
+DTLeccion::~DTLeccion() {
+	
+}
+DTLeccion::DTLeccion(string tema, string objAprendizaje, vector<DTEjercicio*> misEjercicios) {
+	this->tema=tema;
+	this->objAprendizaje=objAprendizaje;
+	this->misEjercicios=misEjercicios;
+}
+void DTLeccion::setTema(string tema){
+	this->tema=tema;
+}
+void DTLeccion::setObjAprendizaje(string objAprendizaje){
+	this->objAprendizaje=objAprendizaje;
 }
 
-vector<DTEjercicio*> DTLeccion::getMisEjercicios() {
-    return this->misEjercicios;
+string DTLeccion::getObjAprendizaje(){
+	return this->objAprendizaje;
 }

@@ -21,6 +21,7 @@ class Profesor;
 #include "Inscripcion.h"
 class Inscripcion;
 #include "Leccion.h" /* Dependencia en Diagrama de Clases */
+class Leccion;
 #include "DTLeccion.h"
 #include "../ICollection/interfaces/ICollection.h"
 #include "../ICollection/interfaces/ICollectible.h"
@@ -28,6 +29,12 @@ class Inscripcion;
 #include "Profesor.h"
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"
+#include"../DataTypes/DTInfoCurso.h"
+#include "../DataTypes/DTCurso.h"
+class DTCurso;
+#include "ICollection/interfaces/ICollection.h"
+
+
 using namespace std;
 
 enum Dificultad {
@@ -46,7 +53,7 @@ private:
 	IDictionary* cursosPrevios; /* Lista de cursos previos */
 	IDictionary* soyPrevioDe; /* Coleccion de cursos de los que soy previo */
 	IDictionary* misLecciones; /* Lista de lecciones */
-	IDictionary* misInscripciones; /* Coleccion de inscripciones */
+	ICollection* misInscripciones; /* Coleccion de inscripciones */
 public:
 	Curso();
 	~Curso();
@@ -54,7 +61,7 @@ public:
 	string getNombreCurso();
 	string getDificultad();
 
-	/* Operaciones de AltaCurso */
+	/* Operaciones de Alta Curso*/
 	void agregateProfesor(Profesor* profDeCurso);
 	void agregateIdioma(Idioma* idiomaDeCurso);
 	void agregateCursoPrevio(IKey* nombreCPrev, Curso* cPrev);
@@ -69,7 +76,25 @@ public:
     void EliminarInscripciones();
     void EliminarCursoPrevio(Curso* c);
 
+	/*Operaciones de consultar estadisticas*/
 	DTProgresoCurso* obtenerEstadisticasCursos();
+
+	/*Operaciones de consultar curso*/
+	DTInfoCurso* getInfo();
+
+	/*Operaciones de Habilitar curso*/
+	bool tieneLecciones();
+
+	/*Operaciones de inscribirse a curso*/
+	vector<string> getPrevios();
+	DTCurso* getDTCurso();
+	void agregateInscripcion(Inscripcion* ins);
+	Leccion* getUltimaLeccionACursar();
+
+	/*Operaciones de agregar ejercicio*/
+
+	vector<string> obtenerLecciones();
+	Leccion* buscarLeccion(string leccion);
 
 };
 

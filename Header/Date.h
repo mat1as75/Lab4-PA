@@ -29,6 +29,9 @@ public:
 	int getMes();
 	int getAnio();
 	string toString();
+	void setDia(int dia);
+	void setMes(int mes);
+	void setAnio(int anio);
 };
 
 #endif /* DATE_H */

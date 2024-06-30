@@ -22,13 +22,21 @@
 #include "../DataTypes/DTEjercicio.h"
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"
+#include "../ICollection/interfaces/IDictionary.h"
+#include "../ICollection/interfaces/ICollectible.h"
+#include "../DataTypes/DTLeccion.h"
+#include "Inscripcion.h"
+class Inscripcion;
+#include "../DataTypes/DTRealizaEjercicio.h"
+
+
 using namespace std;
 
 class Leccion: public ICollectible {
 private:
   string tema;
   string objAprendizaje;
-  ICollection* misEjercicios; /* Lista de ejercicios */
+  IDictionary* misEjercicios; /* Lista de ejercicios */
 public:
   Leccion();
   ~Leccion();
@@ -41,6 +49,21 @@ public:
 
   /* Operacions de EliminarCurso */
   void EliminarEjercicios();
+
+  /*Operaciones de consultar curso*/
+  DTLeccion* getInfo();
+
+  /*Operaciones de inscribirse a curso*/
+  int obtenerCantEjercicios();
+
+  /*Operaciones de Realizar ejercicio*/
+  void agregarEjercicioAprobado(string nomEjercicio, Inscripcion* ins);
+  vector<DTRealizaEjercicio*> obtenerEjercicios(IDictionary* ejerciciosIns);
+  vector<string> obtenerSolucion(string ejARealizar);
+
+  
+
+
 };
 
 #endif /* LECCION_H */

@@ -15,6 +15,7 @@
 
 #include <string>
 #include <vector>
+#include <ctime>
 #include "../ICollection/interfaces/ICollectible.h"
 #include "../ICollection/interfaces/ICollection.h"
 #include "../ICollection/interfaces/IDictionary.h"
@@ -29,6 +30,10 @@
 #include "../DataTypes/DTCompletarFrase.h"
 #include "../DataTypes/DTTraduccion.h"
 #include "../DataTypes/DTProgresoCurso.h"
+#include "DTUsuario.h"
+#include "Profesor.h"
+#include "Estudiante.h"
+#include "../DataTypes/DTRealizaEjercicio.h"
 
 
 using namespace std;
@@ -54,6 +59,14 @@ protected:
     IDictionary* misIdiomasAuxiliares;// coleccion auxiliar de idiomas para crear profesor
 
     vector<DTLeccion*> DTLeccionesAux; /* Vector Auxiliar para AltaCurso */
+    Estudiante* auxEstInscripcion; //puntero auxiliar al estudiante que se quiere inscribir a un curso
+    Estudiante* auxEstRealizarEj;//puntero auxiliar al estudiante que va a realizar un ejercicio
+    string auxEjercicioRealizar;//auxiliar con el nombre del ejercicio que se va a realizar
+    IDictionary* DTEjerciciosAux; /* Coleccion auxiliar de DTEjercicios */
+    Curso* auxC;//puntero para el caso de uso agregar ejercicio
+	Leccion* auxLeccion; //puntero auxiliar para el caso de uso agregar ejercicio
+
+
 public:
     static Controlador* getInstance(); // 3 de Singleton
     virtual ~Controlador();
@@ -101,25 +114,49 @@ public:
 	bool AltaCurso();
 
     /* Operaciones de Agregar Leccion */
-    vector<string> listarCursosNoHabilitados() override;
-    void SeleccionarCurso(string nombreCurso) override;
-    void IngresarDatosLeccion(string tema, string objAprendizaje) override;
-    void agregateLeccion(DTLeccion* DTLec) override;
-    void AltaLeccion() override;
+    vector<string> listarCursosNoHabilitados() ;
+    void SeleccionarCurso(string nombreCurso) ;
+    void IngresarDatosLeccion(string tema, string objAprendizaje) ;
+    void AltaLeccion() ;
      
     /* Operaciones de Agregar Ejercicio */
-    void IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) override;
-    void IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) override;
+    void seleccionarLeccion(string leccion);
+    vector<string> listarLecciones(string nomCurso);
+    void IngresarEjercicioCF(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseACompletar, vector<string> palabrasSolucion) ;
+    void IngresarEjercicioT(string tipoEjercicio, string nombreEjercicio, string descripcion, string fraseATraducir, string fraseTraducida) ;
     
     /* Operaciones de Eliminar Curso */
-    vector<string> ListarCursos() override;
-    void EliminarCurso(string nombreCurso) override;
+    vector<string> ListarCursos() ;
+    void EliminarCurso(string nombreCurso) ;
 
     /*Consultar Estadisticas*/
     vector <string> listarEstudiantes();
 	vector <DTProgresoCurso*> ListarEstadisticasEstudiante(string nickname);
 	vector <DTProgresoCurso*> ListarCursosPropuestosPor(string nickname);
 	DTProgresoCurso* MostrarProgresoCurso(string nombreCurso);
+
+    /*Operaciones de Consultar Curso*/
+    vector <string> listarCursos();
+
+    /*Operaciones de Habilitar Curso*/
+    bool cursoPerteneceNoHab(string nomCurso);
+    bool habilitaCurso(string nomCurso);
+
+
+    /*Operaciones de Inscribirse a curso*/
+    vector <string> listarEstudiantes();
+    bool estudiantePertenece(string estudiante);
+    vector<DTCurso*> listarCursosHabilitadoEtudiante(string estudiante);
+    void inscripcionCurso(string nomC);
+
+    /*Operaciones de Realizar Ejercicio*/
+    vector <string> listarCursosInscripto(string nomE);
+    vector<DTRealizaEjercicio*> mostrarEjercicios(string curso);
+    vector<string> obtenerSolucionEjercicio(string ejARealizar,string curso);
+    bool apruebaEjercicio(string solucionUsuario,string solucionEjercicio, string nomCurso);
+
+
+
 };
 
 #endif /* CONTROLADOR_H */

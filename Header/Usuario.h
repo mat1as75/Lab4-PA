@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 #include "../ICollection/interfaces/ICollectible.h"
-
+#include "../DataTypes/DTUsuario.h"
 
 using namespace std;
 
@@ -35,6 +35,7 @@ public:
 	string getNombreU();
 	string getDescripcionU();
 	virtual string toString() = 0;
+	virtual DTUsuario* getInfo()=0;
 };
 
 #endif /* USUARIO_H */

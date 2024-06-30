@@ -6,6 +6,10 @@
 #include "Profesor.h"
 #include "../DataTypes/DTProgresoCurso.h"
 #include "../DataTypes/DTProfesor.h"
+#include "../ICollection/collections/OrderedDictionary.h"
+#include "../DataTypes/DTUsuario.h"
+#include <iostream>
+
 
 Profesor::Profesor(){
 }
